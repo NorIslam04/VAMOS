@@ -4,7 +4,7 @@ Bienvenue dans ce projet Django ! Ce guide vous aidera à cloner, configurer et 
 
 ---
 
-## 📋 Prérequis
+# 📋 Prérequis
 
 Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votre machine :
 
@@ -16,8 +16,8 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 
 ---
 
-## 🚀 Instructions pour démarrer
- # Executer les commande dans le terminale de VScode:
+# 🚀 Instructions pour démarrer
+ ## Executer les commande dans le terminale de VScode:
 
 ## 1. Clone et entre dans le répertoire :
 ```bash
@@ -39,6 +39,6 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 
 ## 4. Run Server:
 ```bash
-    -> python manage.py runserver
+  python manage.py runserver
 ```
 
