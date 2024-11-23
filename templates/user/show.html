@@ -23,6 +23,9 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Photo
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Prénom
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -36,13 +39,26 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     {% for user in users %}
                     <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex-shrink-0 h-12 w-12">
+                                {% if user.photo %}
+                                    <img class="h-12 w-12 rounded-full object-cover" src="{{ user.photo.url }}" alt="{{ user.first_name }}">
+                                {% else %}
+                                    <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
+                                        <span class="text-xl font-medium text-gray-500">
+                                            {{ user.first_name|make_list|first|upper }}
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                             {{ user.first_name }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                             {{ user.last_name }}
                         </td>
-                        <td  class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 " >
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {{ user.age }} ans
                         </td>
                     </tr>
