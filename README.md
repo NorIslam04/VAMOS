@@ -8,12 +8,15 @@ Bienvenue dans ce projet Django ! Ce guide vous aidera à cloner, configurer et 
 
 Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votre machine :
 
-- **Python 3.8+** install: https://www.python.org/ftp/python/3.13.0/python-3.13.0-amd64.exe
+- **Python 3.8+**  
+  [Télécharger Python 3.13.0 (Windows)](https://www.python.org/ftp/python/3.13.0/python-3.13.0-amd64.exe)
 - **Git**
-- **pip** (installé avec Python)
-- **Virtualenv** (optionnel, mais recommandé)
-- **Un éditeur de code** (par exemple, Visual Studio Code)
-
+- **pip** (inclus avec Python)
+- **Virtualenv** (installé globalement si nécessaire) :  
+  Installez-le une fois si ce n’est pas encore fait :  
+  ```bash
+  pip install virtualenv
+  
 ---
 
 # 🚀 Instructions pour démarrer
@@ -31,13 +34,17 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
   source venv/bin/activate  # Linux/macOS
   venv\Scripts\activate     # Windows
 ```
+## 3. Installer Django pour ce projet :
+```bash
+pip install django
+```
 
-## 3. Installe les dépendances :
+## 4. Installe les dépendances :
 ```bash
   python manage.py migrate
 ```
 
-## 4. Run Server:
+## 5. Run Server:
 ```bash
   python manage.py runserver
 ```
