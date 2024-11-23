@@ -21,20 +21,20 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 
 ## 1. Clone et entre dans le répertoire :
 ```bash
-  ->  git clone <URL-du-dépôt>
-  -> cd <nom-du-projet>
+  git clone <URL-du-dépôt>
+  cd <nom-du-projet>
 ```
 
 ## 2. Crée un environnement virtuel :
 ```bash
-   -> python -m venv venv
-   -> source venv/bin/activate  # Linux/macOS
-   -> venv\Scripts\activate     # Windows
+  python -m venv venv
+  source venv/bin/activate  # Linux/macOS
+  venv\Scripts\activate     # Windows
 ```
 
 ## 3. Installe les dépendances :
 ```bash
-    -> python manage.py migrate
+  python manage.py migrate
 ```
 
 ## 4. Run Server:
