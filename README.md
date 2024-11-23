@@ -39,7 +39,7 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 pip install -r requirements.txt
 ```
   ### Remarque: le fichier "requirements.txt" doit déjà exister dans le Repo
-   ### Sinon exécutez: (Propriétaire de Repo)
+   ### Sinon, demandez au propriétaire du dépôt de procéder comme suit :
   ```bash
     pip freeze > requirements.txt
   ```
