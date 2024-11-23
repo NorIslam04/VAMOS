@@ -34,10 +34,15 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
   source venv/bin/activate  # Linux/macOS
   venv\Scripts\activate     # Windows
 ```
-## 3. Installer Django pour ce projet :
+## 3. Installer les dépendances du projet :
 ```bash
-pip install django
+pip install -r requirements.txt
 ```
+  ### Remarque: le fichier ##requirements.txt ### doit déjà exister dans le Repo
+   ### Sinon exécutez: (Propriétaire de Repo)
+  ```bash
+    pip freeze > requirements.txt
+  ```
 
 ## 4. Installe les dépendances :
 ```bash
