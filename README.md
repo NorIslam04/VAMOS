@@ -18,16 +18,7 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 
 ## 🚀 Instructions pour démarrer
 
-### 1. Cloner le projet
-
-Commencez par cloner le dépôt Git sur votre machine locale et naviguez dans le répertoire cloné :
-
 ```bash
-git clone <URL-du-dépôt>
-cd <nom-du-projet>
-
-
-
 
 # 1. Clone et entre dans le répertoire :
  - executer les commande dans le terminale de VScode:
