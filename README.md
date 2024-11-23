@@ -9,7 +9,7 @@ Bienvenue dans ce projet Django ! Ce guide vous aidera à cloner, configurer et 
 Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votre machine :
 
 - **Python 3.8+**  
-  [Télécharger Python 3.13.0 (Windows)](https://www.python.org/ftp/python/3.13.0/python-3.13.0-amd64.exe)
+  [Télécharger Python 3.13.0 (Windows)](https://www.python.org/ftp/python/3.13.0/python-3.13.0-amd64.exe) + ajoutez le PATH dans variable d'environnement de system
 - **Git**
 - **pip** (inclus avec Python)
 - **Virtualenv** (installé globalement si nécessaire) :  
