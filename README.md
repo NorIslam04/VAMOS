@@ -18,20 +18,27 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 
 ## 🚀 Instructions pour démarrer
  # Executer les commande dans le terminale de VScode:
+
+## 1. Clone et entre dans le répertoire :
 ```bash
-
-# 1. Clone et entre dans le répertoire :
   ->  git clone <URL-du-dépôt>
-   -> cd <nom-du-projet>
+  -> cd <nom-du-projet>
+```
 
-# 2. Crée un environnement virtuel :
+## 2. Crée un environnement virtuel :
+```bash
    -> python -m venv venv
    -> source venv/bin/activate  # Linux/macOS
    -> venv\Scripts\activate     # Windows
+```
 
-# 3. Installe les dépendances :
+## 3. Installe les dépendances :
+```bash
     -> python manage.py migrate
+```
 
-# 4. Run Server:
+## 4. Run Server:
+```bash
     -> python manage.py runserver
+```
 
