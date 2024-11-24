@@ -23,7 +23,7 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Photo
+                            Photos
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Prénom
@@ -40,16 +40,16 @@
                     {% for user in users %}
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex-shrink-0 h-12 w-12">
-                                {% if user.photo %}
-                                    <img class="h-12 w-12 rounded-full object-cover" src="{{ user.photo.url }}" alt="{{ user.first_name }}">
-                                {% else %}
+                            <div class="flex space-x-2">
+                                {% for photo in user.photos.all %}
+                                    <img class="h-20 w-20 rounded object-cover" src="{{ photo.image.url }}" alt="Photo de {{ user.first_name }}">
+                                {% empty %}
                                     <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
                                         <span class="text-xl font-medium text-gray-500">
                                             {{ user.first_name|make_list|first|upper }}
                                         </span>
                                     </div>
-                                {% endif %}
+                                {% endfor %}
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
