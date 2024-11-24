@@ -5,14 +5,18 @@ from .models import User, Photo
 
 class PhotoInline(admin.TabularInline):
     model = Photo
-    extra = 1  # Nombre de champs de photo vides pour en ajouter
-    readonly_fields = ('image_tag',)  # Affiche une prévisualisation des images
+    extra = 1  # Affiche un champ vide pour ajouter une photo
+    readonly_fields = ('image_tag',)  # Affiche uniquement la prévisualisation
 
     def image_tag(self, obj):
         if obj.image:
             return format_html('<img src="{}" style="height: 100px; width: auto;" />', obj.image.url)
         return "Pas d'image"
     image_tag.short_description = "Aperçu"
+
+    # Autorise l'ajout et la suppression de photos, mais pas la modification des images existantes
+    def has_change_permission(self, request, obj=None):
+        return False  # Désactive la modification des images existantes
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -22,4 +26,3 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Photo)
-

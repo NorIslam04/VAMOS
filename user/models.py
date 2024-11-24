@@ -11,9 +11,11 @@ class User(models.Model):
 
 class Photo(models.Model):
     user = models.ForeignKey(User, related_name='photos', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='photos/%Y/%m/%d', default='photos/default.jpg')
+    image = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True, null=True)  # Supprimer le default
 
     def __str__(self):
         return f"Photo de {self.user.first_name} {self.user.last_name}"
+    
+
 
     
