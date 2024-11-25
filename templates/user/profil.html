@@ -45,16 +45,13 @@
                 <p class="text-gray-700 dark:text-gray-300">
                     <strong class="text-gray-900 dark:text-white">Âge :</strong> {{ user.age }}
                 </p>
-                <p class="text-gray-700 dark:text-gray-300">
-                    <strong class="text-gray-900 dark:text-white">Profession :</strong> {{ user.profession }}
-                </p>
             </div>
         </div>
         <form action="{% url 'reset_id_user' %}" method="post" class="mt-6">
             {% csrf_token %}
             <button 
                 type="submit" 
-                class="w-full py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 
+                class="w-full py-3 #ff1a1a text-white rounded-lg hover:bg-red-600 
                        transition-colors duration-300 dark:bg-red-700 dark:hover:bg-red-800 
                        focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
             >
@@ -66,7 +63,7 @@
         <div class="mt-6">
             <button onclick="document.documentElement.classList.toggle('dark')" 
                     class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
-                Basculer mode sombre/clair
+                Basculer  sombre/clair
             </button>
         </div>
     </div>
