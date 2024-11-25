@@ -22,7 +22,7 @@ def add_user(request):
         request.session['id_user'] = user.id #
         return HttpResponseRedirect(reverse('profil'))
     
-    return render(request, 'user/login.html')
+    return render(request, 'user/sign_in.html')
 
 # Afficher tous les utilisateurs
 def show_users(request):
@@ -49,4 +49,18 @@ def reset_id_user(request): # Réinitialiser l'ID de l'utilisateur, modifier les
         request.session['id_user'] = 0  # Réinitialise id_user
         return redirect('login')  # Redirige vers la page de connexion
     return HttpResponse("Méthode non autorisée", status=405)
+
+def login(request):
+        if request.method == 'POST':
+            first_name = request.POST.get('first_name') #cette instruction contient la valeur 'first_name' qui recupere la valeur de l'input et cherche dans la base de donnée et returne la valeur
+            last_name = request.POST.get('last_name')
+
+            try:
+                user = User.objects.get(first_name=first_name, last_name=last_name)
+                request.session['id_user'] = user.id
+                return HttpResponseRedirect(reverse('profil'))
+            except User.DoesNotExist:
+                return HttpResponse("Utilisateur introuvable.")
+        
+        return render(request, 'user/login.html')#path de template
 

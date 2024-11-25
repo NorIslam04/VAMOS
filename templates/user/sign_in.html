@@ -14,11 +14,11 @@
 <body class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center min-h-screen transition-colors duration-300">
     <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8">
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Connexion</h1>
-            <p class="text-gray-600 dark:text-gray-400 mt-2">Connectez-vous à votre compte</p>
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Connexion</h2>
+            <p class="text-gray-600 dark:text-gray-400">Veuillez saisir vos informations</p>
         </div>
 
-        <form action="{% url 'login' %}" method="post" class="space-y-6">
+        <form method="POST" action="{% url 'sign_in' %}" class="space-y-6">
             {% csrf_token %}
             
             <div class="grid grid-cols-2 gap-4">
@@ -50,30 +50,27 @@
                         class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 
                                rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 
                                bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                        placeholder="Votre nom de famille"
+                        placeholder="Votre nom"
                     >
                 </div>
             </div>
 
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <input 
-                        id="remember_me" 
-                        name="remember_me" 
-                        type="checkbox" 
-                        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded 
-                               dark:bg-gray-700 dark:border-gray-600"
-                    >
-                    <label for="remember_me" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">
-                        Se souvenir de moi
-                    </label>
-                </div>
-
-                <div>
-                    <a href="#" class="text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400">
-                        Mot de passe oublié ?
-                    </a>
-                </div>
+            <div>
+                <label for="age" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Âge
+                </label>
+                <input 
+                    type="number" 
+                    id="age" 
+                    name="age" 
+                    required 
+                    min="18" 
+                    max="120"
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 
+                           rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 
+                           bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    placeholder="Votre âge"
+                >
             </div>
 
             <div>
@@ -83,18 +80,22 @@
                            border border-transparent rounded-md shadow-sm 
                            text-white bg-blue-600 hover:bg-blue-700 
                            focus:outline-none focus:ring-2 focus:ring-offset-2 
-                           focus:ring-blue-500 dark:bg-blue-700 dark:hover:bg-blue-600"
+                           focus:ring-blue-500 dark:bg-blue-700 dark:hover:bg-blue-600 
+                           transition-colors duration-300"
                 >
-                    Se connecter
+                S'inscrire
                 </button>
             </div>
         </form>
 
-        <div class="mt-6 text-center">
+        <div class="mt-6 text-center flex items-center justify-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+            </svg>
             <p class="text-sm text-gray-600 dark:text-gray-400">
-                Pas de compte ? 
-                <a href="{% url 'sign_in' %}" class="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
-                    Inscrivez-vous
+                Déjà un compte ? 
+                <a href="{% url 'login' %}" class="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
+                    Connectez-vous
                 </a>
             </p>
         </div>
