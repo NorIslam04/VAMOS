@@ -8,11 +8,11 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form method="POST" action="{% url 'login' %}"> <!--This is the form that will be submitted to the login view , name="login" is the name of the view-->> 
+        <form method="POST" action="{% url 'login' %}"> <!--This is the form that will be submitted to the login view , name="login" is the name of the view-->
             {% csrf_token %}
             <div class="form-group">
                 <label for="first_name">First Name:</label>
-                <input type="text" id="first_name" name="first_name" required>
+                <input type="text" id="first_name" name="first_name" required> <!--name="first_name" la valeur de l'attribut name est utilisée pour identifier les données lors de la soumission du formulaire-->
             </div>
             <div class="form-group">
                 <label for="last_name">Last Name:</label>
