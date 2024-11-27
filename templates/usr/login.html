@@ -1,12 +1,12 @@
 {% load static %}
-<link href={% static 'css/usr/signin.css'%} rel="stylesheet">
+<link href={% static 'css/usr/login.css'%} rel="stylesheet">
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up</title>
+  <title>Log In</title>
   <link rel="icon" href="{% static 'img/usr/logo-modified.png' %}" type="image/png">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -15,25 +15,27 @@
     <div class="header">
       <button class="skip-btn">Skip</button>
     </div>
-    <img src="{% static 'img/usr/logo-modified.png' %}" class="icon">
-    <h1 style="margin-top: 5px;">Sign Up</h1>
+    <img src="{% static 'img/usr/logo-modified.png' %}" class="icon" alt="Logo">
+    <h1 style="margin-top: 15px;">Log In</h1>
    
-    <form action="{% url 'login' %}">
+    <form action="{% url 'signin' %}">
       <label for="username">Username</label>
       <input type="text" id="username" placeholder="Enter username">
 
-      <label for="email">Email or phone number</label>
-      <input type="email" id="email" placeholder="Type your email or phone number">
+      
 
       <label for="password">Password</label>
       <div class="password-wrapper">
         <input type="password" id="password" placeholder="Type your password">
+
       </div>
+      <div class="forgot-password">
+        <button class="forgot-btn">Forgotten Password ?</button>
       <div >
-      <button type="submit" class="register-btn">REGISTER</button>
+      <button type="submit" class="register-btn">LOG IN</button>
       <br>
-      <label style="display: inline;" >HAVE AN ACCOUNT?</label>
-      <button class="skip-btn" type="submit" >Login</button>
+      <label style="display: inline;">Don't have an account?</label>
+      <button class="skip-btn" type="submit" >Sign Up </button>
     </div>
     </form>
   </div>
