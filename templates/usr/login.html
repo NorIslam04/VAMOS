@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Log In</title>
   <link rel="icon" href="{% static 'img/usr/logo-modified.png' %}" type="image/png">
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
@@ -18,15 +17,14 @@
     <img src="{% static 'img/usr/logo-modified.png' %}" class="icon" alt="Logo">
     <h1 style="margin-top: 15px;">Log In</h1>
    
-    <form action="{% url 'signin' %}">
+    <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
       <label for="username">Username</label>
-      <input type="text" id="username" placeholder="Enter username">
-
-      
+      <input type="text" id="username" placeholder="Enter username" name="username" required>
 
       <label for="password">Password</label>
       <div class="password-wrapper">
-        <input type="password" id="password" placeholder="Type your password">
+      <input type="password" id="password" placeholder="Type your password" name="password" required>
 
       </div>
       <div class="forgot-password">
@@ -35,7 +33,7 @@
       <button type="submit" class="register-btn">LOG IN</button>
       <br>
       <label style="display: inline;">DON'T HAVE AN ACCOUNT?</label>
-      <button class="skip-btn" type="submit" >Sign Up </button>
+      <button class="skip-btn" onclick="window.location.href='{% url 'signin' %}'" >Sign Up </button>
     </div>
     </form>
   </div>

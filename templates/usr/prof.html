@@ -1,1 +1,60 @@
-<h1>welcome<h1>
+{% load static %}
+<link href={% static 'css/usr/prof.css'%} rel="stylesheet">
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Utilisateur</title>
+    <link rel="icon" href="{% static 'img/usr/logo-modified.png' %}" type="image/png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="profile-photo">
+                {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" alt="Photo de profil">
+                {% else %}
+                    <div class="placeholder-photo">
+                        <span>{{ user.username|make_list|first|upper }}</span>
+                    </div>
+                {% endif %}
+            </div>
+
+            <h2>{{ user.username }}</h2>
+        </header>
+
+        <section class="contact-info">
+            <h3>Informations de Contact</h3>
+            <p>📧 {{ user.email }}</p>
+        </section>
+
+        <section class="resume">
+            <div class="user-details">
+                <h3>Détails du Compte</h3>
+                <div class="detail-item">
+                    <strong>Nom d'utilisateur :</strong> 
+                    <span>{{ user.username }}</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Email :</strong> 
+                    <span>{{ user.email }}</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="logout-section">
+            <form method="post" action="{% url 'reset' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="logout-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Se déconnecter
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
