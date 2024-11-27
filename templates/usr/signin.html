@@ -12,22 +12,23 @@
 </head>
 <body>
   <div class="container">
-    <div class="header">
+    <div class="header" >
       <button class="skip-btn">Skip</button>
     </div>
     <img src="{% static 'img/usr/logo-modified.png' %}" class="icon">
     <h1 style="margin-top: 5px;">Sign Up</h1>
    
-    <form action="{% url 'login' %}">
+    <form action="{% url 'signin' %}" method="post">
+      {% csrf_token %}
       <label for="username">Username</label>
-      <input type="text" id="username" placeholder="Enter username">
+      <input type="text" id="username" placeholder="Enter username" name="username">
 
       <label for="email">Email or phone number</label>
-      <input type="email" id="email" placeholder="Type your email or phone number">
+      <input type="email" id="email" placeholder="Type your email or phone number" name="email">
 
       <label for="password">Password</label>
       <div class="password-wrapper">
-        <input type="password" id="password" placeholder="Type your password">
+        <input type="password" id="password" placeholder="Type your password" name="password">
       </div>
       <div >
       <button type="submit" class="register-btn">REGISTER</button>
