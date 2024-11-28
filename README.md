@@ -31,7 +31,8 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 ## 2. Crée un environnement virtuel :
 ```bash
   python -m venv venv
-  source venv/bin/activate  # Linux/macOS
+```
+```bash
   venv\Scripts\activate     # Windows
 ```
 ## 3. Installer les dépendances du projet :
