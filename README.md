@@ -32,6 +32,8 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 ```bash
   python -m venv venv
 ```
+
+## 2.1. Activer l'environnement virtuel :
 ```bash
   venv\Scripts\activate     # Windows
 ```
