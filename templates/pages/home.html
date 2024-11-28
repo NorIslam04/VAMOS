@@ -1,0 +1,24 @@
+{% load static %}
+<link href={% static 'css/pages/home.css'%} rel="stylesheet">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{%url 'login'%}">Login</a>
+            <a href="{%url 'admin:index'%}">Admin Panel</a>
+            <a href={%url 'prof'%}>Profile</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome to the Home Page</h1>
+        <p>This is the home page content.</p>
+    </main>
+</body>
+</html>
