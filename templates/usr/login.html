@@ -1,5 +1,6 @@
 {% load static %}
 <link href={% static 'css/usr/login.css'%} rel="stylesheet">
+<script src="{% static 'js/usr/login_error.js' %}"></script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,30 +12,28 @@
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <button class="skip-btn">Skip</button>
-    </div>
     <img src="{% static 'img/usr/logo-modified.png' %}" class="icon" alt="Logo">
     <h1 style="margin-top: 15px;">Log In</h1>
    
-    <form action="{% url 'login' %}" method="POST">
+    <form action="{% url 'login' %}" method="POST" id="login-form">
       {% csrf_token %}
       <label for="username">Username</label>
       <input type="text" id="username" placeholder="Enter username" name="username" required>
-
+    
       <label for="password">Password</label>
       <div class="password-wrapper">
-      <input type="password" id="password" placeholder="Type your password" name="password" required>
-
+        <input type="password" id="password" placeholder="Type your password" name="password" required>
+        <span id="error-message" class="error" style="color: red; display: none;">Incorrect password</span>
       </div>
+    
       <div class="forgot-password">
         <button class="forgot-btn">Forgotten Password?</button>
-      <div >
+      </div>
+    
       <button type="submit" class="register-btn">LOG IN</button>
       <br>
       <label style="display: inline;">DON'T HAVE AN ACCOUNT?</label>
-      <button class="skip-btn" onclick="window.location.href='{% url 'signin' %}'" >Sign Up </button>
-    </div>
+      <button class="skip-btn" onclick="window.location.href='{% url 'signin' %}'">Sign Up</button>
     </form>
   </div>
 </body>
