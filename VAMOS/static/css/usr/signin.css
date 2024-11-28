@@ -24,7 +24,7 @@ body {
   }
   
   .container {
-    background-color: rgba(255, 255, 255, 0.400); /* Transparence légère */
+    background-color: rgba(255, 255, 255, 0.800); /* Transparence légère */
     width: 340px;
     padding: 20px;
     border-radius: 15px;

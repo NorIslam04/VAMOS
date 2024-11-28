@@ -23,7 +23,7 @@ body {
   }
   
   .container {
-    background-color: rgba(255, 255, 255, 0.400); /* Transparence légère */
+    background-color: rgba(255, 255, 255, 0.800); /* Transparence légère */
     width: 340px;
     padding: 20px;
     border-radius: 15px;
@@ -125,3 +125,7 @@ body {
    
     background: linear-gradient(90deg, #5b86e5, #36d1dc);
   }
+  input.error {
+    border: 2px solid red;
+  }
+  
