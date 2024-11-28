@@ -36,11 +36,9 @@ venv\Scripts\activate
 ```bash
 pip install -r requirements.txt
 ```
-  ### Remarque: le fichier "requirements.txt" doit déjà exister dans le Repo
-   #### Sinon, demandez au propriétaire du dépôt d'éxecuter :
-  ```bash
-pip freeze > requirements.txt
-  ```
+  #### Remarque: le fichier "requirements.txt" doit déjà exister dans le Repo
+   ##### Sinon, demandez au propriétaire du dépôt d'éxecuter :
+
 
 ## 5. Appliquer les migrations :
 ```bash
