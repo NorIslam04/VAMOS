@@ -16,7 +16,6 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
   Installez-le une fois si ce n’est pas encore fait :  
   ```bash
   pip install virtualenv
-  
 ---
 
 # 🚀 Instructions pour démarrer
@@ -24,36 +23,36 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 
 ## 1. Clone et entre dans le répertoire :
 ```bash
-  git clone <URL-du-dépôt>
-  cd <nom-du-projet>
+git clone <URL-du-dépôt>
+cd <nom-du-projet>
 ```
 
 ## 2. Crée un environnement virtuel :
 ```bash
-  python -m venv venv
+python -m venv venv
 ```
 
-## 2.1. Activer l'environnement virtuel :
+## 2. Activer l'environnement virtuel :
 ```bash
-  venv\Scripts\activate     # Windows
+venv\Scripts\activate
 ```
-## 3. Installer les dépendances du projet :
+## 4. Installer les dépendances du projet :
 ```bash
 pip install -r requirements.txt
 ```
   ### Remarque: le fichier "requirements.txt" doit déjà exister dans le Repo
    #### Sinon, demandez au propriétaire du dépôt d'éxecuter :
   ```bash
-    pip freeze > requirements.txt
+pip freeze > requirements.txt
   ```
 
-## 4. Appliquer les migrations :
+## 5. Appliquer les migrations :
 ```bash
-  python manage.py migrate
+python manage.py migrate
 ```
 
-## 5. Run Server:
+## 6. Run Server:
 ```bash
-  python manage.py runserver
+python manage.py runserver
 ```
 
