@@ -1,6 +1,4 @@
 {% load static %}
-<link href={% static 'css/usr/signin.css'%} rel="stylesheet">
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,33 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up</title>
   <link rel="icon" href="{% static 'img/usr/logo-modified.png' %}" type="image/png">
+  <link href="{% static 'css/usr/signin.css' %}" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <div class="header" >
-      <button class="skip-btn">Skip</button>
-    </div>
-    <img src="{% static 'img/usr/logo-modified.png' %}" class="icon">
+  
+    <!-- Logo and Title -->
+    <img src="{% static 'img/usr/logo-modified.png' %}" class="icon" alt="Logo">
     <h1 style="margin-top: 5px;">Sign Up</h1>
    
+    <!-- Sign Up Form -->
     <form action="{% url 'signin' %}" method="POST">
       {% csrf_token %}
+
+      <!-- Username Field -->
       <label for="username">Username</label>
       <input type="text" id="username" placeholder="Enter username" name="username" required>
 
+      <!-- Email or Phone Field -->
       <label for="email">Email or phone number</label>
       <input type="email" id="email" placeholder="Type your email or phone number" name="email" required>
 
+      <!-- Password Field -->
       <label for="password">Password</label>
       <div class="password-wrapper">
         <input type="password" id="password" placeholder="Type your password" name="password" required>
       </div>
-      <div >
-      <button type="submit" class="register-btn" type="submit" >REGISTER</button>
-      <br>
-      <label style="display: inline;" >HAVE AN ACCOUNT?</label>
-      <button class="skip-btn" onclick="window.location.href='{% url 'login' %}'">Login</button>
-    </div>
+
+      <!-- Submit and Navigation Buttons -->
+      <div>
+        <button type="submit" class="register-btn">REGISTER</button>
+        <br>
+        <label style="display: inline;">HAVE AN ACCOUNT?</label>
+        <button type="button" class="skip-btn" onclick="window.location.href='{% url 'login' %}'">Login</button>
+      </div>
     </form>
   </div>
 </body>
