@@ -19,20 +19,24 @@
         <form action="{% url 'login' %}" method="POST" id="login-form">
             {% csrf_token %}
             
-            <!-- Username Field -->
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Enter username" name="username" required>
-            
-            <!-- Password Field -->
-            <label for="password">Password</label>
-            <div class="password-wrapper">
-                <input type="password" id="password" placeholder="Type your password" name="password" required>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username" name="username" required>
+                <!-- Username Error Message -->
+                <label id="username-error-message" class="error-message" style="color: red; margin-left: 15px; margin-top: 3px; font-weight: 500; display: none;">
+                </label>
             </div>
             
-            <!-- Error Message -->
-            <label id="error-message" class="error" style="color: red; margin-left: 15px; margin-top: 3px; font-weight: 500; display: none;">
-                Incorrect password
-            </label>
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" placeholder="Type your password" name="password" required>
+                </div>
+                <!-- Password Error Message -->
+                <label id="password-error-message" class="error-message" style="color: red; margin-left: 15px; margin-top: 3px; font-weight: 500; display: none;">
+                </label>
+            </div>
             
             <!-- Forgotten Password -->
             <div class="forgot-password">

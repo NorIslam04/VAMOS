@@ -1,49 +1,67 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById("login-form");
-    const errorMessage = document.getElementById("error-message");
+    const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
+    const usernameErrorMessage = document.getElementById("username-error-message");
+    const passwordErrorMessage = document.getElementById("password-error-message");
 
     if (form) {
         form.addEventListener("submit", function(event) {
-            event.preventDefault(); // Empêche l'envoi classique du formulaire
+            event.preventDefault();
 
-            // Réinitialise l'affichage des erreurs
+            // Réinitialise tous les styles d'erreur
             passwordInput.classList.remove('error');
-            errorMessage.style.display = "none";
+            usernameInput.classList.remove('error');
+            usernameErrorMessage.style.display = "none";
+            passwordErrorMessage.style.display = "none";
 
-            // Récupère les données des champs
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+            const username = usernameInput.value;
+            const password = passwordInput.value;
 
-            // Envoie une requête AJAX vers le backend Django
             fetch(form.action, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',// Type de données envoyées
-                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,// Token CSRF
-                    'X-Requested-With': 'XMLHttpRequest'  // Indique que c'est une requête AJAX
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    'X-Requested-With': 'XMLHttpRequest'
                 },
-                body: new URLSearchParams({// Corps de la requête
-                    username: username,// Nom des champs le premier est le nom de la variable en python et le deuxième est le nom de l'input
+                body: new URLSearchParams({
+                    username: username,
                     password: password
                 })
             })
-            .then(response => response.json())// Récupère la réponse en JSON (objet JavaScript) et la renvoie à la prochaine étape de la chaîne.
-                .then(data => {
-                    if (data.success) {
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
                     // Succès : redirection vers la page profil
-                        window.location.href = data.redirect_url;
-                        } else {
-                    // Échec : affiche le message d'erreur
-                        errorMessage.textContent = data.error;
-                        errorMessage.style.display = "block";
+                    window.location.href = data.redirect_url;
+                } else {
+                    // Gestion des différents types d'erreurs
+                    if (data.error === 'Incorrect password') {
+                        passwordErrorMessage.textContent = data.error;
+                        passwordErrorMessage.style.display = "block";
                         passwordInput.classList.add('error');
+                    } else if (data.error === 'User not found') {
+                        usernameErrorMessage.textContent = data.error;
+                        usernameErrorMessage.style.display = "block";
+                        usernameInput.classList.add('error');
                     }
-                })
-                .catch(error => {
+                }
+            })
+            .catch(error => {
                 console.error("Erreur AJAX :", error);
             });
         });
-        // Optionnel : Supprimer la classe d'erreur quand l'utilisateur commence à taper
+
+        // Écouteurs pour effacer les erreurs lors de la saisie
+        usernameInput.addEventListener('input', function() {
+            this.classList.remove('error');
+            usernameErrorMessage.style.display = "none";
+        });
+
+        passwordInput.addEventListener('input', function() {
+            this.classList.remove('error');
+            passwordErrorMessage.style.display = "none";
+        });
     }
 });
