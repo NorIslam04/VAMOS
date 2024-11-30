@@ -49,7 +49,7 @@ def login(request):
         password = request.POST.get('password')
 
         try:
-            user = Usr.objects.get(username=username)
+            user = Usr.objects.get(username=username)# Récupérer l'utilisateur par son nom d'utilisateur (username) dans la base de données
             
             # Vérification du mot de passe
             if password == user.password:
