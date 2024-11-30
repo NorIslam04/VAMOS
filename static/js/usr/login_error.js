@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Récupération des éléments du formulaire dans html
     const form = document.getElementById("login-form");
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (form) {
         form.addEventListener("submit", function(event) {
-            event.preventDefault();
+            event.preventDefault();// Empêche le rechargement de la page lors de la soumission du formulaire
 
             // Réinitialise tous les styles d'erreur
             passwordInput.classList.remove('error');
@@ -18,20 +19,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const username = usernameInput.value;
             const password = passwordInput.value;
 
-            fetch(form.action, {
+            fetch(form.action, {// Envoi de la requête AJAX au serveur
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
                     'X-Requested-With': 'XMLHttpRequest'
                 },
-                body: new URLSearchParams({
-                    username: username,
+                body: new URLSearchParams({ //
+                    username: username,//le premier username est le nom de la variable dans le fichier views.py
                     password: password
                 })
             })
-            .then(response => response.json())
-            .then(data => {
+            .then(response => response.json())// Récupère la réponse de la requête AJAX
+            .then(data => {// Traite la réponse de la requête AJAX
                 if (data.success) {
                     // Succès : redirection vers la page profil
                     window.location.href = data.redirect_url;

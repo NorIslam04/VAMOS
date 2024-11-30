@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
                     'X-Requested-With': 'XMLHttpRequest'
                 },
-                body: new URLSearchParams({
+                body: new URLSearchParams({ //
                     username: username,//le premier username est le nom de la variable dans le fichier views.py
                     password: password
                 })
