@@ -52,15 +52,15 @@ def login(request):
             user = Usr.objects.get(username=username)
             if password == user.password:# Vérifie si le mot de passe est correct
                 request.session['id_user'] = user.id
-                
+
                 return JsonResponse({'success': True, 'redirect_url': reverse('prof')})  # Réponse JSON
             
             else:
-                return JsonResponse({'success': False, 'error': 'Mot de passe incorrect.'})  # Réponse AJAX
+                return JsonResponse({'success': False, 'error': 'Incorrect password.'})  # Réponse AJAX
 
         except Usr.DoesNotExist:
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':# Vérifie si c'est une requête AJAX
-                return JsonResponse({'success': False, 'error': 'Utilisateur introuvable.'})
+                return JsonResponse({'success': False, 'error': 'User not found.'})
 
     return render(request, 'usr/login.html')
 
