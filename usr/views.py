@@ -1,24 +1,9 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from .models import Usr
+from django.contrib.auth.hashers import check_password
 
-
-def login(request):
-    if request.method == 'POST':
-            username = request.POST.get('username') #cette instruction contient la valeur 'first_name' qui recupere la valeur de l'input et cherche dans la base de donnée et returne la valeur
-            password = request.POST.get('password')
-
-            try:
-                print("im here")
-                user = Usr.objects.get(username=username, password=password)
-                print("user",user)
-                request.session['id_user'] = user.id # affecter la valeur de l'id_user si on a besion de l'utiliser dans une autre fonction dans le cookie du client
-                return HttpResponseRedirect(reverse('prof')) #rediriger vers la page de profil
-            except Usr.DoesNotExist:
-                return HttpResponse("Utilisateur introuvable.")
-        
-    return render(request, 'usr/login.html')#path de template
 
 # Ajouter un utilisateur
 def signin(request):
@@ -55,4 +40,27 @@ def reset_id_user(request): # Réinitialiser l'ID de l'utilisateur, modifier les
         request.session['id_user'] = 0  # Réinitialise id_user cote serveur(cookie)
         return redirect('login')  # Redirige vers la page de connexion
     return HttpResponse("Méthode non autorisée", status=405)
+
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            user = Usr.objects.get(username=username)
+            if password == user.password:# Vérifie si le mot de passe est correct
+                request.session['id_user'] = user.id
+                
+                return JsonResponse({'success': True, 'redirect_url': reverse('prof')})  # Réponse JSON
+            
+            else:
+                return JsonResponse({'success': False, 'error': 'Mot de passe incorrect.'})  # Réponse AJAX
+
+        except Usr.DoesNotExist:
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':# Vérifie si c'est une requête AJAX
+                return JsonResponse({'success': False, 'error': 'Utilisateur introuvable.'})
+
+    return render(request, 'usr/login.html')
 
