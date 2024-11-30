@@ -125,6 +125,9 @@ body {
    
     background: linear-gradient(90deg, #5b86e5, #36d1dc);
   }
+
   input.error {
-    border: 2px solid red;
+    border: 2px solid red !important;
+    outline: none;
 }
+

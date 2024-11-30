@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById("login-form");
     const errorMessage = document.getElementById("error-message");
+    const passwordInput = document.getElementById("password");
 
     if (form) {
         form.addEventListener("submit", function(event) {
             event.preventDefault(); // Empêche l'envoi classique du formulaire
+
+            // Réinitialise l'affichage des erreurs
+            passwordInput.classList.remove('error');
+            errorMessage.style.display = "none";
 
             // Récupère les données des champs
             const username = document.getElementById("username").value;
@@ -32,11 +37,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Échec : affiche le message d'erreur
                         errorMessage.textContent = data.error;
                         errorMessage.style.display = "block";
+                        passwordInput.classList.add('error');
                     }
                 })
                 .catch(error => {
                 console.error("Erreur AJAX :", error);
             });
         });
+        // Optionnel : Supprimer la classe d'erreur quand l'utilisateur commence à taper
     }
 });
