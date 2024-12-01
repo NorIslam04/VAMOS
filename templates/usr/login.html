@@ -13,7 +13,7 @@
     <div class="container">
         <!-- Logo -->
         <img src="{% static 'img/usr/logo-modified.png' %}" class="icon" alt="Logo">
-        <h1 style="margin-top: 15px;">Log In</h1>
+        <h1 style="margin-top: 12px;">Log In</h1>
 
         <!-- Login Form -->
         <form action="{% url 'login' %}" method="POST" id="login-form">
@@ -48,8 +48,8 @@
             
             <!-- Sign Up Section -->
             <br>
-            <label style="display: inline;">DON'T HAVE AN ACCOUNT?</label>
-            <button type="button" class="skip-btn" onclick="window.location.href='{% url 'signin' %}'">Sign Up</button>
+            <label style="display: inline; margin-top: 30px;">DON'T HAVE AN ACCOUNT?</label>
+            <button type="button" class="skip-btn" onclick="window.location.href='{% url 'signin' %}'" >Sign Up</button>
         </form>
     </div>
 </body>

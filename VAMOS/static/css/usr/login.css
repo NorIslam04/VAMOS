@@ -23,7 +23,7 @@ body {
   }
   
   .container {
-    background-color: rgba(255, 255, 255, 0.500); /* Transparence légère */
+    background-color: rgba(255, 255, 255, 0.750); /* Transparence légère */
     width: 340px;
     padding: 20px;
     border-radius: 15px;
@@ -97,7 +97,7 @@ body {
   }
   .forgot-btn{background: none;
     border: none;
-    color: #19095b;
+    color: #007bff;
     font-weight: bold;
     cursor: pointer;
     font-size: 13px;
