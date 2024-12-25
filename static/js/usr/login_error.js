@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordErrorMessage = document.getElementById("password-error-message");
 
     if (form) {
-        form.addEventListener("submit", function(event) {
+        form.addEventListener("submit",
+            function(event) {
             event.preventDefault();// Empêche le rechargement de la page lors de la soumission du formulaire
 
             // Réinitialise tous les styles d'erreur
@@ -19,7 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const username = usernameInput.value;
             const password = passwordInput.value;
 
-            fetch(form.action, {// Envoi de la requête AJAX au serveur
+            fetch(form.action, // Envoi de la requête AJAX au serveur
+                {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

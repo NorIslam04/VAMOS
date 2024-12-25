@@ -1,0 +1,51 @@
+# votre_template.html
+{% block content %}
+<div class="container"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.querySelector(".container");
+        
+        // Récupération des données depuis Django
+        const donnees = JSON.parse('{{ donnees_voyage|safe }}');
+        
+        // Votre fonction createCard existante
+        const creerCarte = (element) => {
+            const carte = document.createElement("div");
+            carte.classList.add("card");
+            carte.innerHTML = `
+                <img src="${element.image}" alt="${element.location}" class="card-image">
+                <div class="header">
+                    <div class="title-with-icon">
+                        <span class="city-name">${element.city}</span>
+                        <img src="${element.countryIcon}" alt="Icône pays" class="contry-icon">
+                    </div>
+                </div>
+                <div class="date">${element.date}</div>
+                <div class="transport-info">
+                    <img src="${element.transportIcon}" alt="Icône transport" class="transport-icon">
+                </div>
+                <div class="location">
+                    <div class="group-photo">
+                        <img src="imageVamos/Group (1).png" alt="Photo groupe">
+                    </div>
+                    ${element.location}
+                </div>
+                <div class="resort-info-line">
+                    <img src="${element.resortImage}" alt="Vue resort" class="resort-image">
+                    <div class="rating">${element.rating}</div>
+                </div>
+                <div class="card-title">${element.title}</div>
+                <img src="imageVamos/next.png" alt="Suivant" class="arrow">
+            `;
+            return carte;
+        };
+
+        // Création et ajout des cartes
+        donnees.forEach(element => {
+            const carte = creerCarte(element);
+            container.appendChild(carte);
+        });
+    });
+</script>
+{% endblock %}
