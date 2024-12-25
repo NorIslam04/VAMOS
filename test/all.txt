@@ -1,0 +1,82 @@
+# Structure des dossiers
+your_project/
+    └── static/
+        └── js/
+            └── cards.js    # Votre fichier JS
+    └── templates/
+        └── votre_template.html
+
+---------------------------------------------------------
+
+# cards.js (dans static/js/)
+// Fonction pour créer les cartes
+const createCard = (item) => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = `
+        <img src="${item.image}" alt="${item.location}" class="card-image">
+        <!-- reste du HTML de la carte -->
+    `;
+    return card;
+};
+
+// Fonction pour initialiser les cartes
+function initializeCards(data) {
+    const container = document.querySelector(".container");
+    data.forEach(item => {
+        const card = createCard(item);
+        container.appendChild(card);
+    });
+}
+
+---------------------------------------------------------
+
+# views.py
+from django.shortcuts import render
+import json
+
+def vue_voyages(request):
+    donnees_voyage = [
+        {
+            "image": "imageVamos/nice.jpg",
+            "city": "Nice",
+            "countryIcon": "imageVamos/france.png",
+            # ... reste des données
+        }
+    ]
+    return render(request, 'votre_template.html', {
+        'donnees_voyage': json.dumps(donnees_voyage)
+    })
+
+---------------------------------------------------------
+
+# votre_template.html
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voyages</title>
+</head>
+<body>
+    <div class="container"></div>
+
+    <!-- Chargement du fichier JS -->
+    <script src="{% static 'js/cards.js' %}"></script>
+    
+    <!-- Script pour passer les données de Django vers JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const data = JSON.parse('{{ donnees_voyage|safe }}');
+            initializeCards(data);
+        });
+    </script>
+</body>
+</html>
+
+---------------------------------------------------------
+
+# settings.py (assurez-vous d'avoir ces configurations)
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]

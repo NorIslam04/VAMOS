@@ -7,7 +7,7 @@
         const container = document.querySelector(".container");
         
         // Récupération des données depuis Django
-        const donnees = JSON.parse('{{ donnees_voyage|safe }}');
+        const donnees = JSON.parse('{{ donnees_voyage|safe }}');//safe: pour éviter l'échappement des caractères spéciaux
         
         // Votre fonction createCard existante
         const creerCarte = (element) => {
