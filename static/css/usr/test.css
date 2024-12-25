@@ -1,0 +1,17 @@
+.chapter {
+    margin: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.chapter-name {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+.chapter-content {
+    color: #444;
+}
+.active {
+    background-color: #f0f0f0;
+}

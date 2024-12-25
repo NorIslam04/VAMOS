@@ -74,3 +74,10 @@ def login(request):
 
     return render(request, 'usr/login.html')
 
+def test(request):
+    chaps = [
+        {'name': 'Chapter 1', 'content': 'This is the first chapter'},
+        {'name': 'Chapter 2', 'content': 'This is the second chapter'},
+        {'name': 'Chapter 3', 'content': 'This is the third chapter'}
+    ]
+    return render(request, 'usr/test.html',{'chaps':chaps}) #context
