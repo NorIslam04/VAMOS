@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward" />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <link href="{% static 'css/pages/test.css' %}" rel="stylesheet">
+    <script src="{% static 'js/pages/test.js' %}"></script>
+
+    <title>VAMOS</title>
+</head>
+<body>
+    <div class="containertotal">
+    <header class="top-bar" id="top-bar">
+        <div class="left-section">
+            <img src="{% static 'img/pages/imageVamos/profilpicture.png' %}" alt="Photo de profil" class="profile-pic">
+            <div class="welcome-text">
+                <span>Welcome back</span>
+                <strong>Kahina</strong>
+            </div>
+        </div>
+        <div class="nav-links">
+            <ul>
+                <li><a href="#">Reviews</a></li>
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Reservation</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div>
+    </header>
+   
+        <div class="contentcontainer">
+
+            <div id="caroussel">
+                <div class="images">
+                    <!-- Slide 1 -->
+                    <div class="slide">
+                        <img src="{% static 'img/pages/imageVamos/maldives.jpg' %}" alt="Omra">
+                        <div class="caption"></div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="slide">
+                        <img src="{% static 'img/pages/imageVamos/tunisie.jpg' %}" alt="Tunisie">
+                        <div class="caption">Maldives-Nature et sérénité</div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="slide">
+                        <img src="{% static 'img/pages/imageVamos/santorini.jpg' %}" alt="Santorini">
+                        <div class="caption">Tunisia- Plages et Culture</div>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="slide">
+                        <img src="{% static 'img/pages/imageVamos/Tanzanie.jpg' %}" alt="Dubai">
+                        <div class="caption">Santorini-Beauté Greque</div>
+                    </div>
+                    <!-- Slide 5 -->
+                    <div class="slide">
+                        <img src="{% static 'img/pages/imageVamos/Qatar.jpg' %}" alt="Qatar">
+                        <div class="caption">Tanzanie-Voyage a l'état Sauvage</div>
+                    </div>
+                </div>
+            
+            <div class="search-bar">
+                <div>
+                    <input type="text" placeholder="Où allez-vous ?" name="destination">
+                </div>
+                <div>
+                    <label for="departure-date"></label>
+                    <input type="text" id="departure-date" placeholder="Départ--/--/--" name="depart">
+                </div>
+                <div>
+                    <label for="arrival-date"></label>
+                    <input type="text" id="arrival-date" placeholder="Arrivée--/--/--"name="arrivée">
+                   
+                </div>
+                <div class="dropdown">
+                    <div class="filter-label">Filtrée</div>
+                    <div class="dropdown-content">
+                        <label>Budget</label>
+                        <div class="range-slider">
+                            <span id="min-budget">10,000$</span>
+                            <input id="budget-range" type="range" min="10000" max="1000000" value="500000" name="budjet">
+                            <span id="max-budget">1,000,000$</span>
+                            <div id="chosen-budget"></div>
+                        </div>
+                
+                        <label>Include</label>
+                        <div class="filters">
+                            <button class="filter-option active" data-filter="Activities">Activities</button>
+                            <button class="filter-option" data-filter="Guide">Guide</button>
+                            <button class="filter-option" data-filter="Transfert">Transfert</button>
+                            <button class="filter-option" data-filter="Visa">Visa</button>
+                            <button class="filter-option" data-filter="Plane Ticket">Plane Ticket</button>
+                            <button class="filter-option" data-filter="Extra">Extra</button>
+                        </div>
+                        
+                        <div id="chosen-filters"></div>
+                
+                        <div class="apply-button">Apply</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <button>Rechercher</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="destination">
+            <h2 class="destination_header">Recomended Places</h2>
+            <ul class="destination_list">
+                <!-- Destination 1 -->
+                <li class="destination_item">
+                    <a href="#" class="destination_link">
+                        <img src="{% static 'img/pages/imageVamos/antalya.jpg' %}" alt=" Antalya" class="destination_img">
+                        <div class="destination_text">
+                            <h3 class="destination_title">Antalya</h3>
+                            <p class="destination_subtitle">MyTravel</p>
+                        </div>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </li>
+                 <!-- Destination 2 -->
+                    <li class="destination_item">
+                        <a href="#" class="destination_link">
+                            <img src="{% static 'img/pages/imageVamos/barcelona.jpeg' %}" alt="Barcelona" class="destination_img">
+                            <div class="destination_text">
+                                <h3 class="destination_title">Barcelona</h3>
+                                <p class="destination_subtitle">skytravel</p>
+                            </div>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                    </li>
+               <!-- Destination 3 -->
+              <li class="destination_item">
+                <a href="#" class="destination_link">
+                    <img src="{% static 'img/pages/imageVamos/rome.jpg' %}" alt="Rome" class="destination_img">
+                    <div class="destination_text">
+                        <h3 class="destination_title">Rome</h3>
+                        <p class="destination_subtitle">Travel with US</p>
+                    </div>
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+               </li>
+              <!-- Destination 4 -->
+              <li class="destination_item">
+                <a href="#" class="destination_link">
+                    <img src="https://res.cloudinary.com/domyszt73/image/upload/v1735136727/hxzmunsmhclg8brxigj0.jpg" alt="Suisse" class="destination_img">
+                    <div class="destination_text">
+                        <h3 class="destination_title">Switzerland</h3>
+                        <p class="destination_subtitle">My agency</p>
+                    </div>
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+               </li>
+            </ul>
+    
+            <h2 class="top-rated_header"> Take a Dip at These Top-rated Agency</h2>
+            <div id="image-carousel" class="carousel">
+               
+                  <img src="{% static 'img/pages/imageVamos/groupe7.jpg' %}" alt="Agency 1" class="carousel-image active">
+                  <img src="{% static 'img/pages/imageVamos/agencegroupe4.jpg' %}" alt="Agency 2" class="carousel-image">
+                  <img src="{% static 'img/pages/imageVamos/groupe3.jpg' %}" alt="Agency 3" class="carousel-image">
+                  <img src="{% static 'img/pages/imageVamos/agencegroupe1.jpg' %}" alt="Agency 4" class="carousel-image">
+              </div>
+              
+            <h2 class="destination_header">Popular searches</h2>
+            <ul class="destination_list">
+                <!-- Destination 1 -->
+                <li class="destination_item">
+                    <a href="#" class="destination_link">
+                        <div class="destination_img_container">
+                            <img src="{% static 'img/pages/imageVamos/canada.jpg' %}" alt="Canada" class="destination_img2">
+                            <div class="destination_text">
+                                <h3 class="destination_title">Canada</h3>
+                            </div>
+                        </div>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </li>
+                <!-- Destination 2 -->
+                <li class="destination_item">
+                    <a href="#" class="destination_link">
+                        <div class="destination_img_container">
+                            <img src="{% static 'img/pages/imageVamos/new york.jpg' %}" alt="New York" class="destination_img2">
+                            <div class="destination_text">
+                                <h3 class="destination_title">New York</h3>
+                            </div>
+                        </div>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </li>
+                <!-- Destination 3 -->
+                <li class="destination_item">
+                    <a href="#" class="destination_link">
+                        <div class="destination_img_container">
+                            <img src="{% static 'img/pages/imageVamos/Brasil.jpg' %}" alt="Brazil" class="destination_img2">
+                            <div class="destination_text">
+                                <h3 class="destination_title">Brazil</h3>
+                            </div>
+                        </div>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </li>
+                <!-- Destination 4 -->
+                <li class="destination_item">
+                    <a href="#" class="destination_link">
+                        <div class="destination_img_container">
+                            <img src="{% static 'img/pages/imageVamos/Paris.jpg' %}" alt="Paris" class="destination_img2">
+                            <div class="destination_text">
+                                <h3 class="destination_title">Paris</h3>
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </div>
+                        </a> 
+                            </div>
+                            </ul>
+                        </div>
+                    </div>
+                   
+        </div>
+       
+          
+
+    </div>
+</body>
+</html>
