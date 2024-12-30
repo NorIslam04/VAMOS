@@ -79,17 +79,14 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', function() {
         var topBar = document.getElementById('top-bar');
         var searchBar = document.querySelector('.search-bar');
-        
-        if (searchBar) {
-            var searchBarBottom = searchBar.getBoundingClientRect().bottom;
-
-            if (window.scrollY > searchBarBottom) {
-                topBar.style.backgroundColor = 'rgba(84, 153, 250, 0.8)';
-            } else {
-                topBar.style.backgroundColor = 'rgba(169, 210, 251, 0.8)';
-            }
+        var searchBarBottom = searchBar.getBoundingClientRect().bottom;
+      
+        if (window.scrollY > searchBarBottom) {
+            topBar.style.backgroundColor = 'rgba(84, 153, 250, 0.8)'; // Change to desired color and opacity
+        } else {
+            topBar.style.backgroundColor = 'transparent'; // Original color
         }
-    });
+      });
 
     // Appliquer les filtres
     const applyButton = document.querySelector('.apply-button');
