@@ -1,5 +1,10 @@
 // Attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function() {
+    const topBar = document.getElementById('top-bar');
+    const searchBar = document.querySelector('.search-bar');
+    
+    // Définir la couleur initiale
+    topBar.style.backgroundColor = 'rgba(255, 255, 255, 0)';
     // Configuration Flatpickr
     const dateConfig = {
         dateFormat: "d/m/Y",
@@ -77,16 +82,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Gestion de la top bar
     window.addEventListener('scroll', function() {
-        var topBar = document.getElementById('top-bar');
-        var searchBar = document.querySelector('.search-bar');
-        var searchBarBottom = searchBar.getBoundingClientRect().bottom;
-      
-        if (window.scrollY > searchBarBottom) {
-            topBar.style.backgroundColor = 'rgba(84, 153, 250, 0.8)'; // Change to desired color and opacity
-        } else {
-            topBar.style.backgroundColor = 'transparent'; // Original color
+        // Vérifier si searchBar existe avant d'accéder à ses propriétés
+        if (searchBar) {
+            const searchBarRect = searchBar.getBoundingClientRect();
+            const searchBarBottom = searchBarRect.bottom + 50;
+            // Changer la couleur en fonction de la position du scroll
+            if (window.scrollY > searchBarBottom) {
+                topBar.style.backgroundColor = 'rgba(84, 153, 250, 0.8)';
+            } else {
+                // Calculer l'opacité en fonction du scroll
+                const scrollProgress = window.scrollY / searchBarBottom;
+                const opacity = Math.min(scrollProgress * 0.8, 0.8);
+                topBar.style.backgroundColor = `rgba(84, 153, 250, ${opacity})`;
+            }
         }
-      });
+    });
 
     // Appliquer les filtres
     const applyButton = document.querySelector('.apply-button');
