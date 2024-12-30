@@ -17,7 +17,7 @@ def signin(request):
         user.save()
         # Stocker l'ID de l'utilisateur dans la session
         request.session['id_user'] = user.id #pour utiliser dans fonction profil et cette instruction generer un cookie cote client
-        return HttpResponseRedirect(reverse('prof'))
+        return HttpResponseRedirect(reverse('homePage'))
     
     return render(request, 'usr/signin.html')
 
@@ -56,7 +56,7 @@ def login(request):
                 
                 return JsonResponse({
                     'success': True, 
-                    'redirect_url': reverse('prof')
+                    'redirect_url': reverse('homePage')
                 })
             else:
                 return JsonResponse({

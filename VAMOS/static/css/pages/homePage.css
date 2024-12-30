@@ -1,0 +1,106 @@
+body{
+    background-color: #23385C;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.containertotal{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo_picture{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Cercle parfait */
+    margin-right: 15px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.text{
+    font-family:Arial, Helvetica, sans-serif;
+    color:#ffffff;
+    font-size:  40px;
+    margin-left: -450px;
+    margin-right: 0%;
+    margin-top: -100px;
+}
+.text h1{
+    align-items: center;
+    white-space: nowrap; 
+}
+.text h3{
+   font-size: 35px;
+    align-items: center;
+    white-space: nowrap; 
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 0px;
+    margin-left: 450px;
+    text-align: center;
+  
+}
+.plane_picture{
+    margin-left: -450px;
+  width: 350px;
+    height:250px;
+}
+.animation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.circle {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    animation: float 8s infinite ease-in-out;
+    opacity: 0.6;
+}
+  
+ /* Updated circle positions and animations */
+.circle:nth-child(1) { background-color: #f39c12; left: 5%; top: 10%; animation-delay: 0s; }
+.circle:nth-child(2) { background-color: #3498db; left: 25%; top: 30%; animation-delay: -1s; }
+.circle:nth-child(3) { background-color: #2ecc71; left: 45%; top: 15%; animation-delay: -2s; }
+.circle:nth-child(4) { background-color: #e74c3c; left: 65%; top: 40%; animation-delay: -3s; }
+.circle:nth-child(5) { background-color: #9b59b6; left: 85%; top: 25%; animation-delay: -4s; }
+.circle:nth-child(6) { background-color: #f39c12; left: 15%; top: 60%; animation-delay: -5s; }
+.circle:nth-child(7) { background-color: #3498db; left: 35%; top: 75%; animation-delay: -6s; }
+.circle:nth-child(8) { background-color: #2ecc71; left: 55%; top: 65%; animation-delay: -7s; }
+.circle:nth-child(9) { background-color: #e74c3c; left: 75%; top: 85%; animation-delay: -8s; }
+.circle:nth-child(10) { background-color:#9b59b6; left: 95%; top: 70%; animation-delay: -9s; }
+
+
+
+  
+  @keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+        transform: translate(100px, -100px) rotate(120deg);
+    }
+    66% {
+        transform: translate(-100px, 100px) rotate(240deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg);
+    }
+}
+  
+  
