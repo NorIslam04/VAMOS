@@ -1,115 +1,168 @@
-
 body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    position: relative; /* Nécessaire pour le pseudo-élément */
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Empêche les barres de défilement */
-  }
-  
-  body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/static/img/usr/pexels-asadphoto-1591373.jpg') no-repeat center center fixed;
-    background-size: cover;
-    filter: blur(0px); /* Rend l'image floue */
-    z-index: -1; /* Place l'image derrière tout */
-  }
-  
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  position: relative; /* Nécessaire pour le pseudo-élément */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Empêche les barres de défilement */
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/static/img/usr/pexels-asadphoto-1591373.jpg') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(5px); /* Rend l'image floue */
+  transition: filter 0.3s ease-in-out; /* Ajout d'une transition pour le flou */
+  z-index: -1; /* Place l'image derrière tout */
+}
+
+body:hover::before {
+  filter: blur(4px);
+  transform: scale(1.05); /* Zoom léger au survol */
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.75); /* Transparence légère */
+  width: 340px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.27);
+  text-align: center;
+  position: relative; /* Pour rester au-dessus du pseudo-élément */
+  z-index: 1;
+  padding-top: 13px;
+  height: 420px;
+}
+
+.header {
+  text-align: right;
+  margin-top: -5px;
+  padding: 0;
+}
+
+.icon {
+  background-size: cover;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.skip-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  margin-left: -5px;
+  padding-top: 3px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #19095b;
+}
+
+p {
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #19095b;
+  font-family: "Gill Sans", sans-serif;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+form input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.194);
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transition pour effet au survol */
+}
+
+form input:hover {
+  border-color: #36d1dc;
+  box-shadow: 0 2px 6px rgba(54, 209, 220, 0.4);
+}
+
+form input:focus {
+  outline: 2px solid #36d1dc;
+  outline-offset: 2px;
+}
+
+.register-btn {
+  width: auto;
+  min-width: 120px;
+  padding: 10px;
+  color: #fff;
+  background: linear-gradient(90deg, #36d1dc, #5b86e5);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  transition: background 0.3s;
+}
+
+.register-btn:hover {
+  background: linear-gradient(90deg, #5b86e5, #36d1dc);
+}
+
+.register-btn:focus {
+  outline: 2px solid #5b86e5;
+  outline-offset: 2px;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+@media (max-width: 480px) {
   .container {
-    background-color: rgba(255, 255, 255, 0.750); /* Transparence légère */
-    width: 340px;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.271);
-    text-align: center;
-    position: relative; /* Pour rester au-dessus du pseudo-élément */
-    z-index: 1;
-    padding-top:13px;
-    height: 420px;
+      width: 95%;
+      height: auto;
+      padding: 15px;
   }
-  
-  .header {
-    text-align: right;
-    margin-top: -5px;
-    padding: 0;
-  }
-  
-  .icon {
-    background-size: cover;
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    z-index: 1;
-  }
-  
-  .skip-btn {
-    background: none;
-    border: none;
-    color: #007bff;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 14px;
-    text-decoration: underline;
-    margin-left: -5px;
-    padding-top:3px ;
-  }
-  
   h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #19095b;
+      font-size: 20px;
   }
-  
   p {
-    font-size: 14px;
-    color: #000000;
-    margin-bottom: 20px;
+      font-size: 12px;
   }
-  
-  form label {
-    display: block;
-    text-align: left;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #19095b;
-    font-family: "Gill Sans", sans-serif;
-    font-weight:600;
-    margin-left: 10px;
-  }
-  
   form input {
-    width: 90%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.194);
+      font-size: 12px;
   }
-  
   .register-btn {
-    width: 35%;
-    padding: 6px;
-    color: #fff;
-    background: linear-gradient(90deg, #36d1dc, #5b86e5);
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 15px;
-    margin-top: 10px;
-    margin-bottom: 15px;
+      font-size: 14px;
+      padding: 8px;
   }
-  
-  .register-btn:hover {
-    background: linear-gradient(90deg, #5b86e5, #36d1dc);
-  }
-  
+}

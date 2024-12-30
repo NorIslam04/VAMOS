@@ -7,18 +7,31 @@ from django.contrib.auth.hashers import check_password
 
 # Ajouter un utilisateur
 def signin(request):
-    if request.method == 'POST': 
-        username = request.POST.get('username')  # Récupère les valeurs POST
+    if request.method == 'POST':
+        username = request.POST.get('username')
         email = request.POST.get('email')
-        password=request.POST.get('password')
-        
+        password = request.POST.get('password')
+
+        # Vérifications supplémentaires
+        if Usr.objects.filter(username=username).exists():
+            return JsonResponse({'success': False, 'error': {'field': 'username', 'message': 'Username already exists'}})
+
+        if Usr.objects.filter(email=email).exists():
+            return JsonResponse({'success': False, 'error': {'field': 'email', 'message': 'Email already registered'}})
+
         # Création de l'utilisateur
-        user = Usr.objects.create(username=username, email=email, password=password)
+        user = Usr.objects.create(
+            username=username,
+            email=email,
+            password=password  # Hachage du mot de passe
+        )
         user.save()
-        # Stocker l'ID de l'utilisateur dans la session
-        request.session['id_user'] = user.id #pour utiliser dans fonction profil et cette instruction generer un cookie cote client
-        return HttpResponseRedirect(reverse('homePage'))
-    
+
+        # Stocker l'ID utilisateur dans la session
+        request.session['id_user'] = user.id
+
+        return JsonResponse({'success': True, 'redirect_url': reverse('homePage')})
+
     return render(request, 'usr/signin.html')
 
 def profil(req):
