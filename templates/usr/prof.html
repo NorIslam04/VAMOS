@@ -13,8 +13,9 @@
         <!-- Header Section -->
         <header>
             <div class="profile-photo">
-                {% if user.profile_picture %}
-                    <img src="{{ user.profile_picture.url }}" alt="Photo de profil">
+                {% if user.image %}
+                {# dans la base donner il stock url de la photo (dans photos)- local host #}
+                    <img src="{{ user.image.url }}" alt="Photo de profil">
                 {% else %}
                     <!-- Placeholder for users without a profile picture -->
                     <div class="placeholder-photo">

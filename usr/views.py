@@ -32,7 +32,6 @@ def profil(req):
         user = Usr.objects.get(id=id_user)  # Récupérer l'utilisateur par son ID
     except Usr.DoesNotExist:
         return HttpResponse("Utilisateur introuvable.")
-    
     return render(req, 'usr/prof.html', {'user': user})
 
 def reset_id_user(request): # Réinitialiser l'ID de l'utilisateur, modifier les cookies
