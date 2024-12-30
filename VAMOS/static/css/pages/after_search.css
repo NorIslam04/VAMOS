@@ -1,0 +1,238 @@
+/* Réinitialisation */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Styles globaux */
+body {
+    background-color: #234563;
+    color: #fff;
+}
+
+/* Barre supérieure */
+.top-bar {
+    width: 100%;
+    height: 90px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.top-bar .nav-links ul {
+    display: flex;
+    list-style: none;
+}
+
+.top-bar .nav-links ul li {
+    margin: 0 130px;
+}
+
+.top-bar a {
+    color: #234563;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.icons {
+    padding-bottom: 55px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* Uncommenting and fixing hover for icons */
+.icons:hover {
+    transform: scale(1.1);  /* Slightly enlarges the icon on hover */
+    transition: transform 0.3s ease;
+}
+
+#caroussel {
+    width: 100%; /* Ensures the carousel takes the full width of the container */
+    overflow: hidden;
+    border-radius: 2px; 
+    margin-left: 150px;
+}
+
+#carousel-images {
+    display: flex;
+    animation: mesImages 20s infinite; /* Animation for sliding images */
+}
+
+#carousel-images img {
+    width: 100%; /* Make images inside the carousel take up full width */
+}
+
+@keyframes mesImages {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(-200%);
+    }
+    75% {
+        transform: translateX(-300%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.top-bar a:hover {
+    color: #387bba;
+}
+
+.top-bar .left-section {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.welcome-text span {
+    font-size: 15px;
+    color: #666666;
+}
+
+.welcome-text strong {
+    display: block;
+    font-size: 20px;
+    color: #387bba;
+    font-weight: bold;
+}
+
+/* Contenu principal */
+.main-content {
+    padding-top: 110px;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next line */
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%; /* Use 100% width to be responsive */
+    padding: 0 50px; /* Adjust space to ensure equal left and right margins */
+    box-sizing: border-box;
+    margin-top: 150px;
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 40px;
+    padding: 15px; /* Reduced padding for less internal space */
+    width: 500px; /* Set a fixed width of 500px for each card */
+    position: relative;
+    color: black;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px; /* Maintain some vertical space between rows */
+    margin-left: 15px;
+    margin-right: 15px;
+    height: 500px; /* Set a fixed height for all cards */
+    margin-top: 50px;
+}
+/* Card 2 (centered) */
+
+
+/* Card 3 */
+.rating i {
+    color: gold;
+    margin-right: 5px;
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.city-name {
+    font-size: 24px;
+    color: #1a365d;
+    font-weight: bold;
+}
+
+/* Icons */
+.contry-icon,
+.arrow {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.resort-image {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.transport-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+/* Text elements */
+.date,
+.location,
+.rating,
+.card-title {
+    color: #000000;
+    margin-bottom: 10px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.rating {
+    margin-left: 65px;
+    margin-top: -30px;
+}
+
+.arrow {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    color: #3182ce;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+}
+
+.group-photo img {
+    margin-right: 10px;
+}
+.card-title {
+    text-align: center;
+    margin-top: -30px; /* Move up by 30px */
+    margin-left: 70px;
+}

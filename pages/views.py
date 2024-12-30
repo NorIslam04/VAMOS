@@ -5,3 +5,6 @@ def home(request):
 
 def test(request):
     return render(request, 'pages/test.html')#path de template
+
+def after_search(request):
+    return render(request, 'pages/after_search.html')#path de template
