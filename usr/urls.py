@@ -7,4 +7,5 @@ urlpatterns = [
     path('profil', views.profil, name='prof',),#name=
     path('reset', views.reset_id_user, name='reset'),
     path('test', views.test, name='test'),
+    path('z', views.z, name='z'),
 ]

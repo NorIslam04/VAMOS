@@ -16,11 +16,10 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: -1; /* Place l'image derrière tout */
   background: url('/static/img/usr/pexels-asadphoto-1591373.jpg') no-repeat center center fixed;
   background-size: cover;
-  filter: blur(3px); /* Rend l'image floue */
-  transition: filter 0.3s ease-in-out; /* Ajout d'une transition pour le flou */
-  z-index: -1; /* Place l'image derrière tout */
+  filter: blur(2px); /* Rend l'image floue */
 }
 
 
@@ -95,13 +94,14 @@ form label {
 form input {
   width: 90%;
   padding: 10px;
-  margin-bottom: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.194);
   transition: border-color 0.3s, box-shadow 0.3s; /* Transition pour effet au survol */
 }
+
+
 
 form input:hover {
   border-color: #36d1dc;
@@ -124,8 +124,8 @@ form input:focus {
   cursor: pointer;
   font-weight: bold;
   font-size: 15px;
-  margin-top: 10px;
-  margin-bottom: 15px;
+  margin-top: 13px;
+  margin-bottom: 10px;
   transition: background 0.9s;
 }
 

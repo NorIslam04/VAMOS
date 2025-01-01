@@ -99,3 +99,6 @@ def test(request):
         {'name': 'Chapter 3', 'content': 'This is the third chapter'}
     ]
     return render(request, 'usr/test.html',{'chaps':chaps}) #context
+
+def z(request):
+    return render(request, 'usr/z.html')
