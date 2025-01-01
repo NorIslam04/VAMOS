@@ -18,27 +18,29 @@ body::before {
   height: 100%;
   background: url('/static/img/usr/pexels-asadphoto-1591373.jpg') no-repeat center center fixed;
   background-size: cover;
-  filter: blur(5px); /* Rend l'image floue */
+  filter: blur(3px); /* Rend l'image floue */
   transition: filter 0.3s ease-in-out; /* Ajout d'une transition pour le flou */
   z-index: -1; /* Place l'image derrière tout */
 }
 
-body:hover::before {
-  filter: blur(4px);
-  transform: scale(1.05); /* Zoom léger au survol */
-}
 
 .container {
   background-color: rgba(255, 255, 255, 0.75); /* Transparence légère */
   width: 340px;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.27);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Ombre plus prononcée au survol */
   text-align: center;
   position: relative; /* Pour rester au-dessus du pseudo-élément */
   z-index: 1;
   padding-top: 13px;
   height: 420px;
+  transition: transform 0.5s ease-in-out; /* Contrôle la vitesse du zoom et du retour */
+}
+
+.container:hover {
+  transform: scale(1.03); /* Zoom léger au survol */
+  transition: transform 0.5s ease-in-out; /* Contrôle la vitesse du zoom et du retour */
 }
 
 .header {
@@ -103,18 +105,18 @@ form input {
 
 form input:hover {
   border-color: #36d1dc;
-  box-shadow: 0 2px 6px rgba(54, 209, 220, 0.4);
+  box-shadow: 0 2px 6px rgba(30, 30, 30, 0.4);
 }
 
 form input:focus {
-  outline: 2px solid #36d1dc;
+  outline: 1.5px solid #36d1dc;
   outline-offset: 2px;
 }
 
 .register-btn {
   width: auto;
   min-width: 120px;
-  padding: 10px;
+  padding: 6px;
   color: #fff;
   background: linear-gradient(90deg, #36d1dc, #5b86e5);
   border: none;
@@ -124,8 +126,9 @@ form input:focus {
   font-size: 15px;
   margin-top: 10px;
   margin-bottom: 15px;
-  transition: background 0.3s;
+  transition: background 0.9s;
 }
+
 
 .register-btn:hover {
   background: linear-gradient(90deg, #5b86e5, #36d1dc);

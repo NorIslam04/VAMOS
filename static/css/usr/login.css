@@ -18,8 +18,12 @@ body::before {
   height: 100%;
   background: url('/static/img/usr/pexels-asadphoto-1591373.jpg') no-repeat center center fixed;
   background-size: cover;
-  filter: blur(0px); /* Rend l'image floue */
+  filter: blur(3px); /* Rend l'image floue */
   z-index: -1; /* Place l'image derrière tout */
+}
+
+body:hover::before {
+  transform: scale(1.05); /* Zoom léger au survol */
 }
 
 .container {
