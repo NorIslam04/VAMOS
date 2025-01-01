@@ -83,22 +83,29 @@ document.addEventListener("DOMContentLoaded", () => {
                     <img src="${item.countryIcon}" alt="Country icon" class="contry-icon">
                 </div>
             </div>
+
             <div class="date">${item.date}</div>
             <div class="transport-info">
                 <img src="${item.transportIcon}" alt="Transport icon" class="transport-icon">
             </div>
+
             <div class="location">
                 <div class="group-photo">
                     <img src="../imageVamos/Group (1).png" alt="Group photo">
                 </div>
                 ${item.location}
             </div>
+
             <div class="resort-info-line">
                 <img src="${item.resortImage}" alt="Resort View" class="resort-image">
                 <div class="rating">${item.rating}</div>
             </div>
+
             <div class="card-title">${item.title}</div>
-            <img src="/static/img/pages/imageVamos/next.png" alt="Next" class="arrow">
+            
+            <a href="${infoPageUrl}">
+                <img src="/static/img/pages/imageVamos/next.png" alt="Next" class="arrow">
+            </a>
         `;
 
         return card;
