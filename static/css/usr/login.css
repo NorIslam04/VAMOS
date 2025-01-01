@@ -22,10 +22,6 @@ body::before {
   z-index: -1; /* Place l'image derrière tout */
 }
 
-body:hover::before {
-  transform: scale(1.05); /* Zoom léger au survol */
-}
-
 .container {
   background-color: rgba(255, 255, 255, 0.750); /* Transparence légère */
   width: 340px;
@@ -37,7 +33,14 @@ body:hover::before {
   z-index: 1;
   padding-top:13px;
   height: 420px;
+  transition: transform 0.5s ease-in-out;
 }
+
+.container:hover {
+  transform: scale(1.03); /* Zoom léger au survol */
+  transition: transform 0.5s ease-in-out; /* Contrôle la vitesse du zoom et du retour */
+}
+
 
 .header {
   text-align: right;
@@ -97,6 +100,17 @@ form input {
   border-radius: 8px; /* Coins arrondis */
   font-size: 14px; /* Taille de police standard */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.194); /* Ombre légère pour un effet visuel */
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form input:hover {
+  border-color: #36d1dc;
+  box-shadow: 0 2px 6px rgba(30, 30, 30, 0.4);
+}
+
+form input:focus {
+  outline: 1.5px solid #36d1dc;
+  outline-offset: 2px;
 }
 
 .forgot-btn {
@@ -127,8 +141,12 @@ margin-top: 5px; /* Espacement avec le champ précédent */
 }
 
 .register-btn:hover {
- 
   background: linear-gradient(90deg, #5b86e5, #36d1dc);
+}
+
+.register-btn:focus {
+  outline: 2px solid #5b86e5;
+  outline-offset: 2px;
 }
 
 input.error {
