@@ -15,9 +15,14 @@ def signin(request):
         # Vérifications supplémentaires
         if Usr.objects.filter(username=username).exists():
             return JsonResponse({'success': False, 'error': {'field': 'username', 'message': 'Username already exists'}})
+        
+        # Email validation
+        if not email or '@' not in email:
+            return JsonResponse({'success': False, 'error': {'field': 'email', 'message': 'Invalid email format'}})
 
-        if Usr.objects.filter(email=email).exists():
-            return JsonResponse({'success': False, 'error': {'field': 'email', 'message': 'Email already registered'}})
+        # Password validation (at least 8 characters)
+        if not password or len(password) < 8:
+            return JsonResponse({'success': False, 'error': {'field': 'password', 'message': 'Password must be at least 8 characters'}})
 
         # Création de l'utilisateur
         user = Usr.objects.create(
@@ -28,7 +33,8 @@ def signin(request):
         user.save()
 
         # Stocker l'ID utilisateur dans la session
-        request.session['id_user'] = user.id
+        request.session['id_user'] = user.username # unique
+        print(request.session['id_user'])
 
         return JsonResponse({'success': True, 'redirect_url': reverse('homePage')})
 

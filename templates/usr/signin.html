@@ -23,16 +23,18 @@
       <!-- Username Field -->
       <label for="username">Username</label>
       <input type="text" id="username" placeholder="Enter username" name="username" required>
-
+      <label id="username-error-message" class="error-message" style="color: red; margin-left: 15px; margin-top: 3px; font-weight: 500; display: none;">
+      </label>
       <!-- Email or Phone Field -->
       <label for="email">Email or phone number</label>
       <input type="email" id="email" placeholder="Type your email or phone number" name="email" required>
-
+      <label id="email-error-message" class="error-message" style="color: red; margin-left: 15px; margin-top: 3px; font-weight: 500; display: none;">
+      </label>
       <!-- Password Field -->
       <label for="password">Password</label>
-      <div class="password-wrapper">
         <input type="password" id="password" placeholder="Type your password" name="password" required>
-      </div>
+        <label id="password-error-message" class="error-message" style="color: red; margin-left: 15px; margin-top: 3px; font-weight: 500; display: none;">
+        </label>
 
       <!-- Submit and Navigation Buttons -->
       <div>
