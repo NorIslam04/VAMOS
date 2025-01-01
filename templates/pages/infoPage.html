@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nice, France - VAMOS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+
+
+    <link href="{% static 'css/pages/infoPage.css' %}" rel="stylesheet">
+    <script src="{% static 'js/pages/infoPage.js' %}"></script>
+</head>
+<body>
+    <header class="header">
+        <header class="top-bar" id="top-bar">
+            <div class="left-section">
+                <img src="{% static 'img/pages/imageVamos/profilpicture.png' %}" alt="Photo de profil" class="profile-pic">
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="#">Reviews</a></li>
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Reservation</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+    </header>
+
+    <a href="#" class="back-button">
+        <i class="fas fa-chevron-left"></i>
+        NICE, France
+    </a>
+    <main class="main-content">
+        <div class="location-header">
+            <h1 class="location-title">
+                Hyatt Regency Nice Palais de la Méditerranée
+                <i class="fas fa-bookmark"></i>
+            </h1>
+            <img src="{% static 'img/pages/imageVamos/Arrispectif.jpg' %}" alt="Arrispectif voyage" style="border-radius: 50%;" class="agence-image">
+        
+        <div class="agency-info">
+            <h2>Arrispectif Voyage</h2>
+        </div>
+    </div>
+
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide">
+                <img src="{% static 'img/pages/imageVamos/nice.jpg' %}" alt="Vue de la terrasse">
+            </div>
+            <div class="slide">
+                <img src="{% static 'img/pages/imageVamos/chambrenice.jpg' %}" alt="Chambre">
+            </div>
+            <div class="slide">
+                <img src="{% static 'img/pages/imageVamos/restaurantnice.jpg' %}" alt="Restaurant">
+            </div>
+            <div class="slide">
+                <img src="{% static 'img/pages/imageVamos/piscinenice.jpg' %}" alt="Piscine">
+            </div>
+        </div>
+        
+        <div class="slider-nav">
+            <div class="slider-dot active"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+        </div>
+        
+        <button class="slider-button prev-button">❮</button>
+        <button class="slider-button next-button">❯</button>
+    </div>
+
+    <div class="hotel-info">
+        <div class="info-section description-section">
+            <p style="line-height: 1.6; color: #333; margin-bottom: 1.5rem;">
+                Découvrez un séjour d'exception au Hyatt Regency Nice Palais de la Méditerranée, un établissement emblématique de la Promenade des Anglais. Ce palace Art Déco historique vous offre une expérience unique avec sa vue imprenable sur la Baie des Anges. Profitez d'un hébergement luxueux qui allie le charme de la Riviera française au confort moderne.
+            </p>
+            <p style="line-height: 1.6; color: #333; margin-bottom: 1.5rem;">
+                Votre forfait comprend un accès complet aux installations haut de gamme de l'hôtel : piscine intérieure chauffée, piscine extérieure avec terrasse panoramique, centre de bien-être avec hammam et sauna. La formule demi-pension vous permet de savourer les délices de la gastronomie française au restaurant Le 3e, où nos chefs fusionnent traditions locales et cuisine contemporaine.
+            </p>
+            <p style="line-height: 1.6; color: #333; margin-bottom: 2.5rem;">
+                Idéalement situé au cœur de Nice, vous êtes à quelques pas de la vieille ville, du marché aux fleurs Cours Saleya, et des principales attractions culturelles. L'aéroport de Nice-Côte d'Azur est accessible en 15 minutes.
+            </p>
+        </div>
+        <div class="dates-duration">
+            <div class="info-section">
+                <h3>Dates:</h3>
+                <p>From May 5 to May 10, 2025</p>
+            </div>
+            <div class="info-section">
+                <h3>Duration:</h3>
+                <p>5 Nights / 6 Days</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Location:</h3>
+            <p>Promenade des Anglais, Nice, France</p>
+        </div>
+
+        <div class="info-section">
+            <h3>Package:</h3>
+            <p>Half-Board (Breakfast & Dinner)</p>
+        </div>
+
+        <div class="info-section">
+            <h3>Facilities:</h3>
+            <ul class="facilities-list">
+                <li>
+                    <i class="fas fa-check"></i>
+                    Indoor and outdoor pools, hammam, sauna
+                </li>
+                <li>
+                    <i class="fas fa-check"></i>
+                    Terrace with stunning views of the Baie des Anges
+                </li>
+            </ul>
+        </div>
+
+        <div class="price-section">
+            <div class="price-item">
+                <span>Adults:</span>
+                <span>145,000 DZD (approx. €1,030) per person</span>
+            </div>
+            <div class="price-item">
+                <span>Children (2-11 years):</span>
+                <span>110,000 DZD (approx. €780) per child</span>
+            </div>
+        </div>
+
+        <p style="margin: 1rem 0; color: #666;">
+            Note: The package does not include excursions or other activities.
+        </p>
+
+        <button class="book-now-btn">BOOK NOW</button>
+    </div>
+
+    <div class="map-section" style="cursor: pointer" onclick="openGoogleMaps()">
+        <h3>Maps & Info</h3>
+        <p>13, Promenade des Anglais - BP 1655 Nice</p>
+        <!-- Utilisation d'OpenStreetMap avec Leaflet -->
+
+        <div id="map" style="height: 400px; width: 100%; border-radius: 8px;"></div>
+        <div style="text-align: center; padding: 10px; color: #666;">
+            <i class="fas fa-external-link-alt"></i> Click to open in Google Maps
+        </div>
+    </div>
+    </main>  
+</body>
+</html>

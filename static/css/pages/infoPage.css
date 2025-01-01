@@ -1,0 +1,307 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+.top-bar {
+    width: 100%;
+    height: 80px;
+    background-color: rgba(65, 142, 253, 0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.top-bar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.top-bar .nav-links ul {
+    display: flex;
+    list-style: none;
+}
+
+.top-bar .nav-links ul li {
+    margin: 0 130px;
+}
+
+a:hover {
+    color: #555;
+}
+
+a:active {
+    color: #333;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.navigation-icons {
+    display: flex;
+    gap: 2rem;
+    margin-left: auto;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #00bcd4;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 30px;
+    padding-top: 120px;
+}
+
+.location-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    color: #23385C;
+    white-space: nowrap;
+}
+
+.location-header .agency-info h2 {
+    color: #23385C;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.location-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.agence-image {
+    width: 40px;
+    height: 40px;
+    margin-left: 450px;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 800px;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider-nav {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    border: 2px solid white;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    background-color: white;
+}
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.slider-button:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.prev-button {
+    left: 20px;
+}
+
+.next-button {
+    right: 20px;
+}
+
+.agency-info h3 {
+    color: #23385C;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hotel-info {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dates-duration {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-section {
+    margin-bottom: 1.5rem;
+}
+
+.info-section h3 {
+    color: #23385C;
+    margin-bottom: 0.5rem;
+}
+
+.facilities-list li .fas.fa-check {
+    color: #1BD1F9;
+}
+
+.facilities-list {
+    list-style: none;
+}
+
+.facilities-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.price-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.book-now-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(45deg, #4F76FF, #1BD1F9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.book-now-btn:hover {
+    background-color: #008ba3;
+}
+
+.map-section {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.map-section img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.map-section h3 {
+    color: #23385C;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .hotel-image {
+        height: 300px;
+    }
+
+    .dates-duration {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .top-bar {
+        padding: 0 10px;
+    }
+
+    .top-bar .nav-links ul li {
+        margin: 0 10px;
+    }
+}

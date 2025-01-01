@@ -11,3 +11,6 @@ def after_search(request):
 
 def homePage(request):
     return render(request, 'pages/homePage.html')#path de template
+
+def infoPage(request):
+    return render(request, 'pages/infoPage.html')#path de template
