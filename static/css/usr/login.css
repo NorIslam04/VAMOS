@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
+  position: relative; /* Nécessaire pour le pseudo-élément */
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -17,32 +18,36 @@ body::before {
   height: 100%;
   background: url('/static/img/usr/pexels-asadphoto-1591373.jpg') no-repeat center center fixed;
   background-size: cover;
-  filter: blur(8px); /* Ajout d'un flou plus perceptible */
-  z-index: -1;
+  filter: blur(0px); /* Rend l'image floue */
+  z-index: -1; /* Place l'image derrière tout */
 }
 
 .container {
-  background-color: rgba(255, 255, 255, 0.85); /* Transparence légère et subtile */
-  width: 360px;
-  padding: 25px;
+  background-color: rgba(255, 255, 255, 0.750); /* Transparence légère */
+  width: 340px;
+  padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Ombre plus douce */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.271);
   text-align: center;
+  position: relative; /* Pour rester au-dessus du pseudo-élément */
   z-index: 1;
-  height: 450px;
+  padding-top:13px;
+  height: 420px;
 }
 
 .header {
-  text-align: center;
-  margin-bottom: 10px;
+  text-align: right;
+  margin-top: -5px;
+  padding: 0;
 }
 
 .icon {
   background-size: cover;
-  width: 70px;
-  height: 70px;
+  width: 65px;
+  height: 65px;
   border-radius: 50%;
-  margin: 15px auto;
+  z-index: 1;
+  margin-top: 15px;
 }
 
 .skip-btn {
@@ -53,6 +58,8 @@ body::before {
   cursor: pointer;
   font-size: 14px;
   text-decoration: underline;
+  margin-left: -5px;
+  padding-top:7px ;
 }
 
 h1 {
@@ -63,7 +70,7 @@ h1 {
 
 p {
   font-size: 14px;
-  color: #333;
+  color: #000000;
   margin-bottom: 20px;
 }
 
@@ -73,75 +80,54 @@ form label {
   margin-bottom: 5px;
   font-size: 14px;
   color: #19095b;
-  font-weight: 600;
+  font-family: "Gill Sans", sans-serif;
+  font-weight:600;
   margin-left: 10px;
+  margin-top: 15px;
 }
 
 form input {
-  width: 90%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-  margin-bottom: 15px;
-  transition: border 0.3s;
-}
-
-form input:focus {
-  border-color: #5b86e5;
-  outline: none;
+  width: 90%; /* Largeur relative pour s'adapter au conteneur */
+  padding: 10px; /* Espacement interne pour le confort visuel */
+  border: 1px solid #ddd; /* Bordure légère pour un design épuré */
+  border-radius: 8px; /* Coins arrondis */
+  font-size: 14px; /* Taille de police standard */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.194); /* Ombre légère pour un effet visuel */
 }
 
 .forgot-btn {
-  background: none;
-  border: none;
-  color: #007bff;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 13px;
-  text-decoration: underline;
-  float: right;
-  margin-top: -10px;
+background: none; /* Pas de fond */
+border: none; /* Pas de bordure */
+color: #19095b; /* Texte bleu pour une bonne visibilité */
+font-weight: bold; /* Texte en gras */
+cursor: pointer; /* Curseur "pointeur" pour signaler un clic */
+font-size: 13px; /* Taille légèrement réduite */
+text-decoration: underline; /* Soulignement pour un lien classique */
+margin-left: 180px; /* Positionnement spécifique */
+margin-top: 5px; /* Espacement avec le champ précédent */
 }
 
 .register-btn {
-  width: 90%;
-  padding: 10px;
+  width: 35%;
+  padding: 6px;
   color: #fff;
   background: linear-gradient(90deg, #36d1dc, #5b86e5);
-  transition: background 0.4s, transform 0.3s;
+  transition: background 0.9s;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 15px;
+  margin-top: 30px;
+  margin-bottom: 15px;
 }
 
 .register-btn:hover {
+ 
   background: linear-gradient(90deg, #5b86e5, #36d1dc);
-  transform: scale(1.05);
 }
 
 input.error {
-  border: 2px solid red !important;
-  outline: none;
-}
-
-.loading-spinner {
-  width: 30px;
-  height: 30px;
-  border: 3px solid #ddd;
-  border-top: 3px solid #007bff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 10px auto;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  border: 2px solid red !important; /* Bordure rouge pour indiquer une erreur */
+  outline: none; /* Supprime l'effet de focus par défaut */
 }
