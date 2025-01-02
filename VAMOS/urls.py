@@ -27,5 +27,5 @@ urlpatterns = [
     path('agence/',include('agence.urls')),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG:  # Seulement en mode DEBUG
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

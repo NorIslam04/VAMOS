@@ -16,7 +16,7 @@
         <h1 style="margin-top: 12px;">Log In</h1>
 
         <!-- Login Form -->
-        <form action="{% url 'login' %}" method="POST" id="login-form">
+        <form action="{% url 'add_voyage' %}" method="POST" id="login-form">
             {% csrf_token %}
             
             <div class="form-group">
