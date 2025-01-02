@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from .models import Voyage
@@ -29,4 +30,11 @@ def add_voyage(request):
             return render(request, 'agence/add_voyage.html', {'errors':e ,'title': title})
 
     return render(request, 'agence/add_voyage.html')
+
+def display_voyage(request):
+        title='nono'
+        voyage= Voyage.objects.filter(titre=title)
+        if not voyage.exists():
+            return JsonResponse({'success': False, 'error': {'field': 'title', 'message': 'Voyage not found'}})
+        return render(request, 'agence/display_voyage.html', {'voyages': voyage})
 
