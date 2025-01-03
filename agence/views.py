@@ -1,7 +1,8 @@
 import base64
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.core.files.base import ContentFile
+from django.urls import reverse
 from .models import Agence, Voyage
 from .models import Voyage
 from django.core.exceptions import ValidationError
@@ -13,9 +14,13 @@ from django.core.exceptions import ValidationError
 import base64
 
 def add_voyage(request):
+    id_agence = request.session.get('id_agence', 0)
+    if id_agence == 0:
+        return HttpResponse("Vous devez vous connecter pour accéder à cette page.")
+    
     if request.method == 'POST':
         try:
-            # Get basic form fields
+            # Récupérer les champs du formulaire
             destination = request.POST.get('destination')
             description = request.POST.get('description', "Aucune description fournie.")
             date_depart = request.POST.get('date_depart') or None
@@ -25,27 +30,27 @@ def add_voyage(request):
             prix_adulte = request.POST.get('prix_adulte', 0)
             prix_enfant = request.POST.get('prix_enfant', 0)
             package = request.POST.get('package')
-            agence_id = 1  # You might want to make this dynamic
 
-            # Handle services
+            # Gérer les services
             services_selectionnes = request.POST.getlist('services')
             activites = 'activites' in services_selectionnes
             transport = 'transport' in services_selectionnes
             billet_avion = 'billet-avion' in services_selectionnes
             visa = 'visa' in services_selectionnes
 
-            # Get the agency
-            agence = Agence.objects.get(id=agence_id)
-
-            # Handle image uploads
+            # Gérer les images téléchargées
             images = []
-            for i in range(1, 5):  # Handle up to 4 images
+            for i in range(1, 5):  # Gérer jusqu'à 4 images
                 image_key = f'image{i}'
                 if image_key in request.FILES:
                     images.append(request.FILES[image_key])
 
-            # Create the voyage object
+            # Récupérer l'agence à partir de l'ID
+            agence = Agence.objects.get(id=id_agence)
+
+            # Créer l'objet voyage
             voyage = Voyage.objects.create(
+                agence=agence,  # Assigner l'agence à la clé étrangère
                 Destination=destination,
                 image1=images[0] if len(images) > 0 else None,
                 image2=images[1] if len(images) > 1 else None,
@@ -59,7 +64,6 @@ def add_voyage(request):
                 prix_adulte=prix_adulte,
                 prix_enfant=prix_enfant,
                 package=package,
-                agence=agence,
                 Activités=activites,
                 Transport=transport,
                 billet_avion=billet_avion,
@@ -90,10 +94,26 @@ def add_voyage(request):
     return render(request, 'agence/add_voyage.html', {'agences': agences})
 
 
-def display_voyage(request):
-        destination='test'
-        voyage= Voyage.objects.filter(destination=destination)
-        if not voyage.exists():
-            return JsonResponse({'success': False, 'error': {'field': 'title', 'message': 'Voyage not found'}})
-        return render(request, 'agence/display_voyage.html', {'voyages': voyage})
 
+
+def login_agence(request, username, password):
+    try:
+        # Vérifier si l'agence existe dans la base de données
+        agence = Agence.objects.get(nom=username)
+        
+        # Vérification du mot de passe
+        if password == agence.password:
+            request.session['id_agence'] = agence.id  # Sauvegarder l'ID de l'agence dans la session
+            return JsonResponse({
+                'success': True, 
+                'redirect_url': reverse('add_voyage')
+            })
+        else:
+            return JsonResponse({
+                'success': False,
+                'error': 'Incorrect password'
+            })
+
+    except Agence.DoesNotExist:
+        # Agence non trouvée
+        return JsonResponse({'success': False, 'error': 'Agence not found'})

@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from .models import Usr
 from django.contrib.auth.hashers import check_password
+from agence import views as agence_views
 
 
 # Ajouter un utilisateur
@@ -66,12 +67,17 @@ def login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
+        if username.startswith('agence.'):  # Si le nom d'utilisateur commence par 'agence.'
+            username = username[7:]  # Supprimer le préfixe 'agence.'
+            return agence_views.login_agence(request, username, password)
+
         try:
-            user = Usr.objects.get(username=username)# Récupérer l'utilisateur par son nom d'utilisateur (username) dans la base de données
+            # Vérifier si l'utilisateur existe dans la base de données
+            user = Usr.objects.get(username=username)
             
             # Vérification du mot de passe
             if password == user.password:
-                request.session['id_user'] = user.id
+                request.session['id_user'] = user.id  # Sauvegarder l'ID de l'utilisateur dans la session
                 
                 return JsonResponse({
                     'success': True, 
@@ -91,6 +97,7 @@ def login(request):
             })
 
     return render(request, 'usr/login.html')
+
 
 def test(request):
     chaps = [
