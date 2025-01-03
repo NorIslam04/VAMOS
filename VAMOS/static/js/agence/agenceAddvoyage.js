@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const imagesPreview = document.getElementById('imagesPreview');
     const form = document.getElementById('travelForm');
     const MAX_IMAGES = 4;
-    
+
     // Track uploaded images
     let uploadedImages = [];
 
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const statusText = uploadedImages.length > 0 
             ? `${uploadedImages.length} image(s) sélectionnée(s)` 
             : "Aucun fichier choisi";
-            
+
         // Créer ou mettre à jour l'élément de statut
         let statusElement = document.getElementById('upload-status');
         if (!statusElement) {
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
             imagesInput.parentNode.insertBefore(statusElement, imagesInput.nextSibling);
         }
         statusElement.textContent = statusText;
-        
+
         // Désactiver l'input si le maximum est atteint
         imagesInput.disabled = uploadedImages.length >= MAX_IMAGES;
     }
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const img = document.createElement('img');
             img.src = e.target.result;
             img.alt = 'Preview';
-            
+
             const deleteButton = document.createElement('button');
             deleteButton.className = 'delete-image';
             deleteButton.innerHTML = '&times;';
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Maximum 4 images allowed');
             return;
         }
-        
+
         Array.from(files).slice(0, remainingSlots).forEach(file => {
             if (file.type.startsWith('image/')) {
                 createImagePreview(file);
@@ -110,9 +110,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         const formData = new FormData(form);
-        
+
         // Remove any existing image fields
         uploadedImages.forEach((file, index) => {
             formData.append(`image${index + 1}`, file);
@@ -129,10 +129,16 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                form.reset();
-                window.location.href = data.redirect_url;
+                Swal.fire({
+                    title: 'Votre voyage a été enregistré avec succès!',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    form.reset(); // Réinitialise le formulaire après l'alerte
+                    window.location.href = data.redirect_url; // Redirige l'utilisateur
+                });
             } else {
-                alert(data.error);
+                alert(data.error); // Affiche une alerte en cas d'erreur
             }
         })
         .catch(error => {
@@ -162,60 +168,4 @@ function selectOption(element) {
     var selectedValue = element.getAttribute('data-value');
     document.getElementById('selected-package').value = selectedValue;
 }
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const travelForm = document.getElementById('travelForm');
-    
-    if (travelForm) {
-        travelForm.addEventListener('submit', async function (event) {
-            event.preventDefault();
-            
-            // Première confirmation avant soumission
-            const confirmResult = await Swal.fire({
-                title: 'Confirmez-vous l\'enregistrement ?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Oui, enregistrer',
-                cancelButtonText: 'Annuler'
-            });
-
-            if (confirmResult.isConfirmed) {
-                // Crée un formulaire AJAX pour éviter le rechargement de la page
-                const formData = new FormData(this);
-
-                try {
-                    const response = await fetch(this.action, {
-                        method: this.method,
-                        body: formData
-                    });
-
-                    if (response.ok) {
-                        await Swal.fire({
-                            title: 'Votre voyage a été enregistré avec succès!',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then(() => {
-                            window.location.reload(); // Recharge la page après confirmation
-                        });
-                    } else {
-                        throw new Error('Erreur serveur');
-                    }
-                } catch (error) {
-                    console.error("Erreur lors de la soumission:", error);
-                    await Swal.fire({
-                        title: 'Une erreur est survenue',
-                        text: 'Veuillez réessayer',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                }
-            }
-        });
-    } else {
-        console.error("Formulaire non trouvé, vérifiez l'ID.");
-    }
-});
-
-
 

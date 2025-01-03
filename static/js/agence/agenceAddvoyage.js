@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const imagesPreview = document.getElementById('imagesPreview');
     const form = document.getElementById('travelForm');
     const MAX_IMAGES = 4;
-    
+
     // Track uploaded images
     let uploadedImages = [];
 
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const statusText = uploadedImages.length > 0 
             ? `${uploadedImages.length} image(s) sélectionnée(s)` 
             : "Aucun fichier choisi";
-            
+
         // Créer ou mettre à jour l'élément de statut
         let statusElement = document.getElementById('upload-status');
         if (!statusElement) {
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
             imagesInput.parentNode.insertBefore(statusElement, imagesInput.nextSibling);
         }
         statusElement.textContent = statusText;
-        
+
         // Désactiver l'input si le maximum est atteint
         imagesInput.disabled = uploadedImages.length >= MAX_IMAGES;
     }
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const img = document.createElement('img');
             img.src = e.target.result;
             img.alt = 'Preview';
-            
+
             const deleteButton = document.createElement('button');
             deleteButton.className = 'delete-image';
             deleteButton.innerHTML = '&times;';
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Maximum 4 images allowed');
             return;
         }
-        
+
         Array.from(files).slice(0, remainingSlots).forEach(file => {
             if (file.type.startsWith('image/')) {
                 createImagePreview(file);
@@ -108,69 +108,43 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
     document.head.appendChild(style);
 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Première confirmation avant soumission
-        const confirmResult = await Swal.fire({
-            title: 'Confirmez-vous l\'enregistrement ?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Oui, enregistrer',
-            cancelButtonText: 'Annuler'
-        });
 
-        if (!confirmResult.isConfirmed) {
-            return;
-        }
-        
         const formData = new FormData(form);
-        
+
         // Remove any existing image fields
         uploadedImages.forEach((file, index) => {
             formData.append(`image${index + 1}`, file);
         });
 
-        try {
-            // Send the form data using fetch
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                }
-            });
-
-            const data = await response.json();
-
+        // Send the form data using fetch
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
             if (data.success) {
-                // Afficher le message de succès
-                await Swal.fire({
+                Swal.fire({
                     title: 'Votre voyage a été enregistré avec succès!',
                     icon: 'success',
                     confirmButtonText: 'OK'
+                }).then(() => {
+                    form.reset(); // Réinitialise le formulaire après l'alerte
+                    window.location.href = data.redirect_url; // Redirige l'utilisateur
                 });
-                
-                // Réinitialiser le formulaire
-                form.reset();
-                imagesPreview.innerHTML = '';
-                uploadedImages = [];
-                updateUploadStatus();
-                
-                // Rediriger après la confirmation
-                window.location.href = data.redirect_url;
             } else {
-                throw new Error(data.error || 'Une erreur est survenue');
+                alert(data.error); // Affiche une alerte en cas d'erreur
             }
-        } catch (error) {
+        })
+        .catch(error => {
             console.error('Error:', error);
-            await Swal.fire({
-                title: 'Une erreur est survenue',
-                text: error.message || 'Veuillez réessayer',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        }
+            alert('Une erreur est survenue lors de l\'envoi du formulaire');
+        });
     });
 
     imagesInput.addEventListener('change', function () {
@@ -180,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize upload status
     updateUploadStatus();
 });
-
 //............................................options de package...............................................
 function selectOption(element) {
     var options = document.querySelectorAll('.package-option');
@@ -196,66 +169,3 @@ function selectOption(element) {
     document.getElementById('selected-package').value = selectedValue;
 }
 
-// Add event listener for the document ready event
-document.addEventListener('DOMContentLoaded', function () {
-    // Get the travel form
-    const travelForm = document.getElementById('travelForm');
-    
-    // Check if the form exists
-    if (travelForm) {
-        // Add submit event listener to the form
-        travelForm.addEventListener('submit', async function (event) {
-            // Prevent default form submission
-            event.preventDefault();
-            
-            // Show confirmation dialog
-            const confirmResult = await Swal.fire({
-                title: 'Confirmez-vous l\'enregistrement ?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Oui, enregistrer',
-                cancelButtonText: 'Annuler'
-            });
-
-            // If user confirms
-            if (confirmResult.isConfirmed) {
-                // Create FormData object
-                const formData = new FormData(this);
-
-                try {
-                    // Send form data to server
-                    const response = await fetch(this.action, {
-                        method: this.method,
-                        body: formData
-                    });
-
-                    // If response is OK
-                    if (response.ok) {
-                        // Show success message
-                        await Swal.fire({
-                            title: 'Votre voyage a été enregistré avec succès!',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then(() => {
-                            // Reload page after confirmation
-                            window.location.reload();
-                        });
-                    } else {
-                        throw new Error('Erreur serveur');
-                    }
-                } catch (error) {
-                    console.error("Erreur lors de la soumission:", error);
-                    // Show error message
-                    await Swal.fire({
-                        title: 'Une erreur est survenue',
-                        text: 'Veuillez réessayer',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                }
-            }
-        });
-    } else {
-        console.error("Formulaire non trouvé, vérifiez l'ID.");
-    }
-});
