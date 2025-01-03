@@ -1,87 +1,100 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Voyage</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
-    
-    <title>Formulaire de Voyage</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        form {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        input[type="text"], input[type="file"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link href="{% static 'css/agence/agenceAddvoyage.css' %}" rel="stylesheet">
+    <script src="{% static 'js/agence/agenceAddvoyage.js' %}"></script>
 </head>
 <body>
-    <h1>Formulaire de Voyage</h1>
-    <form action="{% url 'add_voyage' %}" method="POST" id="add_voyage" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="trip-title">Titre du Voyage :</label>
-        <input type="text" id="trip-title" name="title" placeholder="Entrez le titre du voyage" required>
+    <div class="logo">
+        <img src="{% static 'img/pages/imageVamos/logo.png' %}" alt="logo"  class="logo_picture">
+      </div>
+    <a href="#" class="back-button" onclick="history.back()">
+        <img src="{% static 'img/pages/imageVamos/next 5.png' %}" alt="back"class="back_picture">
+    </a>
 
-        <label for="image1">Image 1 :</label>
-        <input type="file" id="image1" name="image1" accept="image/*" required>
+    <div class="container">
+        <h1>Ajouter un Nouveau Voyage</h1>
+        <form action="{% url 'add_voyage' %}" method="POST"  id="travelForm" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Images du Voyage</label>
+                <div class="image-upload-container">
+                    <input type="file" id="images" accept="image/*" multiple required>
+                    <div id="imagesPreview"></div>
+                </div>
+            </div>
 
-        <label for="image2">Image 2 :</label>
-        <input type="file" id="image2" name="image2" accept="image/*" required>
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <input type="text" id="destination" name="destination" required>
 
-        <label for="image3">Image 3 :</label>
-        <input type="file" id="image3" name="image3" accept="image/*" required>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
 
-        <label for="image4">Image 4 :</label>
-        <input type="file" id="image4" name="image4" accept="image/*" required>
+            <div class="form-group">
+                <label for="departureDate">Date de Départ</label>
+                <input type="date" id="departureDate" name="date_depart" required>
+            </div>
 
-        <button type="submit" >Soumettre</button>
-    </form>
+            <div class="form-group">
+                <label for="returnDate">Date de Retour</label>
+                <input type="date" id="returnDate" name="date_retour" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hotel">Nom de l'Hôtel</label>
+                <input type="text" id="hotel" name="nom_hotel" required>
+            </div>
+
+            <div class="form-group">
+                <label for="rating">Note de l'Hôtel (0-5)</label>
+                <input type="number" id="rating" min="0" max="5" step="1" name="note_hotel" required>
+            </div>
+
+            <div class="form-group">
+                <label>Package</label>
+                <div class="package-options">
+                    <div class="package-option" data-value="demi-pension" onclick="selectOption(this)">Demi-Pension</div>
+                    <div class="package-option" data-value="all-inclusive" onclick="selectOption(this)">All Inclusive</div>
+                    <div class="package-option" data-value="petit-dejeuner" onclick="selectOption(this)">Petit Déjeuner</div>
+                </div>
+            </div>
+        
+            <!-- Champ caché pour envoyer la valeur -->
+            <input type="hidden" name="package" id="selected-package">
+
+            <div class="form-group">
+                <label for="priceAdult">Prix Adulte</label>
+                <input type="number" id="priceAdult" min="0" step="1000" placeholder="exemple: 23000DA" name="prix_adulte" required>
+            </div>
+
+            <div class="form-group">
+                <label for="priceChild">Prix Enfant (-12 ans)</label>
+                <input type="number" id="priceChild" min="0" step="1000" placeholder="exemple: 23000DA" name="prix_enfant" required>
+            </div>
+
+            <div class="form-group">
+                <label>Services supplémentaires</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="services" value="activites"> Activités</label>
+                    <label><input type="checkbox" name="services" value="billet-avion"> Billet d'avion</label>
+                    <label><input type="checkbox" name="services" value="visa"> Visa</label>
+                    <label><input type="checkbox" name="services" value="transport"> Transport</label>
+                </div>
+            </div>
+
+            <button type="submit">Ajouter le Voyage</button>
+        </form>
+    </div>
+   
 </body>
-<script>
-    document.getElementById('add_voyage').addEventListener('submit', function(event) {
-        event.preventDefault(); // Empêche l'envoi par défaut du formulaire
-    
-        Swal.fire({
-            title: 'Votre voyage a été enregistré avec succès!',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                event.target.submit(); // Soumet le formulaire après la confirmation
-            }
-        });
-    });
-    
-</script>
 </html>

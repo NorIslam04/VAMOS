@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 
 def add_voyage(request):
     if request.method == 'POST':
-        destination = request.POST.get('title')
+        destination = request.POST.get('destination')
         image1 = request.FILES.get('image1')
         image2 = request.FILES.get('image2')
         image3 = request.FILES.get('image3')
@@ -15,16 +15,16 @@ def add_voyage(request):
         description = request.POST.get('description', "Aucune description fournie.")
         date_depart = request.POST.get('date_depart') or None
         date_retour = request.POST.get('date_retour') or None
-        nom_hotel = request.POST.get('nom_hotel', "Hôtel Inconnu")
+        nom_hotel = request.POST.get('nom_hotel')
         note_hotel = request.POST.get('note_hotel', 0)
         prix_adulte = request.POST.get('prix_adulte', 0)
         prix_enfant = request.POST.get('prix_enfant', 0)
-        package = request.POST.get('package', "Standard")
-        agence_id = request.POST.get('agence')
-        activites = bool(request.POST.get('Activités'))
-        transport = bool(request.POST.get('Transport'))
-        billet_avion = bool(request.POST.get('billet_avion'))
-        visa = bool(request.POST.get('visa'))
+        package = request.POST.get('package')
+        agence_id = 1# stocker dans une session
+        activites = bool(request.POST.get('Activités'))#
+        transport = bool(request.POST.get('Transport'))#
+        billet_avion = bool(request.POST.get('billet_avion'))#
+        visa = bool(request.POST.get('visa'))#
 
         try:
             agence = Agence.objects.get(id=agence_id)
