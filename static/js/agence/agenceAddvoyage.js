@@ -108,8 +108,21 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
     document.head.appendChild(style);
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
+        
+        // Première confirmation avant soumission
+        const confirmResult = await Swal.fire({
+            title: 'Confirmez-vous l\'enregistrement ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Oui, enregistrer',
+            cancelButtonText: 'Annuler'
+        });
+
+        if (!confirmResult.isConfirmed) {
+            return;
+        }
         
         const formData = new FormData(form);
         
@@ -118,26 +131,46 @@ document.addEventListener('DOMContentLoaded', function () {
             formData.append(`image${index + 1}`, file);
         });
 
-        // Send the form data using fetch
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
+        try {
+            // Send the form data using fetch
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            });
+
+            const data = await response.json();
+
             if (data.success) {
+                // Afficher le message de succès
+                await Swal.fire({
+                    title: 'Votre voyage a été enregistré avec succès!',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                
+                // Réinitialiser le formulaire
                 form.reset();
+                imagesPreview.innerHTML = '';
+                uploadedImages = [];
+                updateUploadStatus();
+                
+                // Rediriger après la confirmation
+                window.location.href = data.redirect_url;
             } else {
-                alert(data.error);
+                throw new Error(data.error || 'Une erreur est survenue');
             }
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Error:', error);
-            alert('Une erreur est survenue lors de l\'envoi du formulaire');
-        });
+            await Swal.fire({
+                title: 'Une erreur est survenue',
+                text: error.message || 'Veuillez réessayer',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
     });
 
     imagesInput.addEventListener('change', function () {
@@ -147,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize upload status
     updateUploadStatus();
 });
+
 //............................................options de package...............................................
 function selectOption(element) {
     var options = document.querySelectorAll('.package-option');
@@ -162,15 +196,19 @@ function selectOption(element) {
     document.getElementById('selected-package').value = selectedValue;
 }
 
-
+// Add event listener for the document ready event
 document.addEventListener('DOMContentLoaded', function () {
+    // Get the travel form
     const travelForm = document.getElementById('travelForm');
     
+    // Check if the form exists
     if (travelForm) {
+        // Add submit event listener to the form
         travelForm.addEventListener('submit', async function (event) {
+            // Prevent default form submission
             event.preventDefault();
             
-            // Première confirmation avant soumission
+            // Show confirmation dialog
             const confirmResult = await Swal.fire({
                 title: 'Confirmez-vous l\'enregistrement ?',
                 icon: 'warning',
@@ -179,29 +217,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 cancelButtonText: 'Annuler'
             });
 
+            // If user confirms
             if (confirmResult.isConfirmed) {
-                // Crée un formulaire AJAX pour éviter le rechargement de la page
+                // Create FormData object
                 const formData = new FormData(this);
 
                 try {
+                    // Send form data to server
                     const response = await fetch(this.action, {
                         method: this.method,
                         body: formData
                     });
 
+                    // If response is OK
                     if (response.ok) {
+                        // Show success message
                         await Swal.fire({
                             title: 'Votre voyage a été enregistré avec succès!',
                             icon: 'success',
                             confirmButtonText: 'OK'
                         }).then(() => {
-                            window.location.reload(); // Recharge la page après confirmation
+                            // Reload page after confirmation
+                            window.location.reload();
                         });
                     } else {
                         throw new Error('Erreur serveur');
                     }
                 } catch (error) {
                     console.error("Erreur lors de la soumission:", error);
+                    // Show error message
                     await Swal.fire({
                         title: 'Une erreur est survenue',
                         text: 'Veuillez réessayer',
@@ -215,6 +259,3 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error("Formulaire non trouvé, vérifiez l'ID.");
     }
 });
-
-
-

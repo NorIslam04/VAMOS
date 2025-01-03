@@ -71,7 +71,10 @@ def add_voyage(request):
             )
             voyage.save()
 
-            return JsonResponse({'success': True})
+            return JsonResponse(
+                {'success': True,
+                'redirect_url': reverse('show_voyage')}
+                )
 
         except Agence.DoesNotExist:
             return JsonResponse({

@@ -130,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             if (data.success) {
                 form.reset();
+                window.location.href = data.redirect_url;
             } else {
                 alert(data.error);
             }
