@@ -1,19 +1,37 @@
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Éléments du DOM
+document.addEventListener('DOMContentLoaded', function () {
     const imagesInput = document.getElementById('images');
     const imagesPreview = document.getElementById('imagesPreview');
     const form = document.getElementById('travelForm');
-    const imageUploadContainer = document.querySelector('.image-upload-container');
     const MAX_IMAGES = 4;
+    
+    // Track uploaded images
+    let uploadedImages = [];
 
-    // Fonction pour créer la prévisualisation d'une image
+    function updateUploadStatus() {
+        const remainingSlots = MAX_IMAGES - uploadedImages.length;
+        const statusText = uploadedImages.length > 0 
+            ? `${uploadedImages.length} image(s) sélectionnée(s)` 
+            : "Aucun fichier choisi";
+            
+        // Créer ou mettre à jour l'élément de statut
+        let statusElement = document.getElementById('upload-status');
+        if (!statusElement) {
+            statusElement = document.createElement('div');
+            statusElement.id = 'upload-status';
+            imagesInput.parentNode.insertBefore(statusElement, imagesInput.nextSibling);
+        }
+        statusElement.textContent = statusText;
+        
+        // Désactiver l'input si le maximum est atteint
+        imagesInput.disabled = uploadedImages.length >= MAX_IMAGES;
+    }
+
     function createImagePreview(file) {
         const reader = new FileReader();
         const wrapper = document.createElement('div');
         wrapper.className = 'image-preview-wrapper';
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             const img = document.createElement('img');
             img.src = e.target.result;
             img.alt = 'Preview';
@@ -22,85 +40,112 @@ document.addEventListener('DOMContentLoaded', function() {
             deleteButton.className = 'delete-image';
             deleteButton.innerHTML = '&times;';
             deleteButton.type = 'button';
-            
+
             wrapper.appendChild(img);
             wrapper.appendChild(deleteButton);
-            
-            deleteButton.addEventListener('click', function() {
+            imagesPreview.appendChild(wrapper);
+
+            // Add to uploaded images array
+            uploadedImages.push(file);
+            updateUploadStatus();
+
+            deleteButton.addEventListener('click', function () {
+                const index = Array.from(imagesPreview.children).indexOf(wrapper);
+                uploadedImages.splice(index, 1);
                 wrapper.remove();
-                updateImagesStatus();
+                updateUploadStatus();
             });
         };
-
         reader.readAsDataURL(file);
-        return wrapper;
     }
 
-    // Fonction pour vérifier le statut des images
-    function updateImagesStatus() {
-        const currentImages = imagesPreview.children.length;
-        const remainingSlots = MAX_IMAGES - currentImages;
-        
-        if (currentImages >= MAX_IMAGES) {
-            imagesInput.disabled = true;
-            imageUploadContainer.style.opacity = '0.5';
-        } else {
-            imagesInput.disabled = false;
-            imageUploadContainer.style.opacity = '1';
-        }
-
-        // Mettre à jour le message d'information
-        const infoMessage = document.createElement('div');
-        infoMessage.textContent = `${currentImages}/${MAX_IMAGES} images (${remainingSlots} restantes)`;
-        
-        // Remplacer ou ajouter le message d'information
-        const existingInfo = imageUploadContainer.querySelector('.info-message');
-        if (existingInfo) {
-            existingInfo.replaceWith(infoMessage);
-        } else {
-            imageUploadContainer.appendChild(infoMessage);
-        }
-    }
-
-    // Gestion des fichiers
     function handleFiles(files) {
-        const currentImages = imagesPreview.children.length;
-        const remainingSlots = MAX_IMAGES - currentImages;
+        const remainingSlots = MAX_IMAGES - uploadedImages.length;
+        if (remainingSlots <= 0) {
+            alert('Maximum 4 images allowed');
+            return;
+        }
         
         Array.from(files).slice(0, remainingSlots).forEach(file => {
             if (file.type.startsWith('image/')) {
-                imagesPreview.appendChild(createImagePreview(file));
+                createImagePreview(file);
             }
         });
-        
-        updateImagesStatus();
     }
 
-    // Événements Drag & Drop
-    imageUploadContainer.addEventListener('dragover', function(e) {
+    // Style pour le statut d'upload
+    const style = document.createElement('style');
+    style.textContent = `
+        #upload-status {
+            margin-top: 5px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .image-preview-wrapper {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+        }
+        .image-preview-wrapper img {
+            max-width: 150px;
+            max-height: 150px;
+            object-fit: cover;
+        }
+        .delete-image {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+    `;
+    document.head.appendChild(style);
+
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-        this.style.borderColor = '#3498db';
+        
+        const formData = new FormData(form);
+        
+        // Remove any existing image fields
+        uploadedImages.forEach((file, index) => {
+            formData.append(`image${index + 1}`, file);
+        });
+
+        // Send the form data using fetch
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = data.redirect_url;
+            } else {
+                alert(data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Une erreur est survenue lors de l\'envoi du formulaire');
+        });
     });
 
-    imageUploadContainer.addEventListener('dragleave', function(e) {
-        e.preventDefault();
-        this.style.borderColor = '#ddd';
-    });
-
-    imageUploadContainer.addEventListener('drop', function(e) {
-        e.preventDefault();
-        this.style.borderColor = '#ddd';
-        handleFiles(e.dataTransfer.files);
-    });
-
-    // Événement de sélection d'images
-    imagesInput.addEventListener('change', function() {
+    imagesInput.addEventListener('change', function () {
         handleFiles(this.files);
-        this.value = ''; // Reset input
     });
 
-    // Initialisation
-    updateImagesStatus();
+    // Initialize upload status
+    updateUploadStatus();
 });
 //............................................options de package...............................................
 function selectOption(element) {
