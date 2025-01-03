@@ -21,11 +21,12 @@ def add_voyage(request):
         prix_enfant = request.POST.get('prix_enfant', 0)
         package = request.POST.get('package')
         agence_id = 1# stocker dans une session
-        activites = bool(request.POST.get('Activités'))#
-        transport = bool(request.POST.get('Transport'))#
-        billet_avion = bool(request.POST.get('billet_avion'))#
-        visa = bool(request.POST.get('visa'))#
-
+         # Récupération des services sélectionnés
+        services_selectionnes = request.POST.getlist('services')
+        activites = 'activites' in services_selectionnes
+        transport = 'transport' in services_selectionnes
+        billet_avion = 'billet-avion' in services_selectionnes
+        visa = 'visa' in services_selectionnes
         try:
             agence = Agence.objects.get(id=agence_id)
             voyage = Voyage.objects.create(

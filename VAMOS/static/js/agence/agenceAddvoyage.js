@@ -116,16 +116,60 @@ function selectOption(element) {
     var selectedValue = element.getAttribute('data-value');
     document.getElementById('selected-package').value = selectedValue;
 }
-document.getElementById('add_voyage').addEventListener('submit', function(event) {
-    event.preventDefault(); // Empêche l'envoi par défaut du formulaire
 
-    Swal.fire({
-        title: 'Votre voyage a été enregistré avec succès!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            event.target.submit(); // Soumet le formulaire après la confirmation
-        }
-    });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const travelForm = document.getElementById('travelForm');
+    
+    if (travelForm) {
+        travelForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            
+            // Première confirmation avant soumission
+            const confirmResult = await Swal.fire({
+                title: 'Confirmez-vous l\'enregistrement ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Oui, enregistrer',
+                cancelButtonText: 'Annuler'
+            });
+
+            if (confirmResult.isConfirmed) {
+                // Crée un formulaire AJAX pour éviter le rechargement de la page
+                const formData = new FormData(this);
+
+                try {
+                    const response = await fetch(this.action, {
+                        method: this.method,
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        await Swal.fire({
+                            title: 'Votre voyage a été enregistré avec succès!',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            window.location.reload(); // Recharge la page après confirmation
+                        });
+                    } else {
+                        throw new Error('Erreur serveur');
+                    }
+                } catch (error) {
+                    console.error("Erreur lors de la soumission:", error);
+                    await Swal.fire({
+                        title: 'Une erreur est survenue',
+                        text: 'Veuillez réessayer',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            }
+        });
+    } else {
+        console.error("Formulaire non trouvé, vérifiez l'ID.");
+    }
 });
+
+
+
