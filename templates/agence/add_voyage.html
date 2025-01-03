@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
     <title>Formulaire de Voyage</title>
     <style>
         body {
@@ -65,4 +68,20 @@
         <button type="submit" >Soumettre</button>
     </form>
 </body>
+<script>
+    document.getElementById('add_voyage').addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêche l'envoi par défaut du formulaire
+    
+        Swal.fire({
+            title: 'Votre voyage a été enregistré avec succès!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.target.submit(); // Soumet le formulaire après la confirmation
+            }
+        });
+    });
+    
+</script>
 </html>
