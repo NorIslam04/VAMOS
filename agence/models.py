@@ -1,4 +1,5 @@
 from django.db import models
+from usr.models import Usr
 
 
 class Agence(models.Model):
@@ -33,3 +34,11 @@ class Voyage(models.Model):
     
     def __str__(self):
         return f"{self.Destination}"
+
+class DemandeVoyage(models.Model):
+    id = models.AutoField(primary_key=True)
+    voyage = models.ForeignKey(Voyage, on_delete=models.CASCADE)
+    user = models.ForeignKey(Usr, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.user.username} {self.voyage.Destination}" 
