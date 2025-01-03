@@ -67,11 +67,7 @@ def add_voyage(request):
             )
             voyage.save()
 
-            # Return JSON response for AJAX request
-            return JsonResponse({
-                'success': True,
-                'redirect_url': '/success-url/'  # Replace with your success URL
-            })
+            return JsonResponse({'success': True})
 
         except Agence.DoesNotExist:
             return JsonResponse({
