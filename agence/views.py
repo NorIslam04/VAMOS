@@ -117,3 +117,11 @@ def login_agence(request, username, password):
     except Agence.DoesNotExist:
         # Agence non trouvée
         return JsonResponse({'success': False, 'error': 'Agence not found'})
+    
+def show_voyage(request):
+    id_agence = request.session.get('id_agence', 0)
+    if id_agence == 0:
+        return HttpResponse("Vous devez vous connecter pour accéder à cette page.")
+    agence=Agence.objects.get(id=id_agence)
+    voyages = Voyage.objects.filter(agence=agence)
+    return render(request, 'agence/show_voyage.html', {'voyages': voyages})
